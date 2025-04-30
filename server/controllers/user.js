@@ -80,8 +80,7 @@ export const likeImage =   async (req,res,next)=>{
     const imageId = req.params.imageId;
     try {
       await Image.findByIdAndUpdate(imageId,{
-        $addToSet:{likes:id},
-        $pull:{dislikes:id}
+        $addToSet:{likes:id}
       })
       res.status(200).json("The image has been liked.")
     } catch (err) {
@@ -105,7 +104,7 @@ export const dislikeImage =  async  (req,res,next)=>{
 export const saveImage = async  (req,res,next)=>{
     try {
         await User.findByIdAndUpdate(req.user.id, {
-          $push: { savedImages: req.params.imageId },
+          $addToSet: { savedImages: req.params.imageId },
         });
         res.status(200).json("The image has been saved.")
       } catch (err) {
