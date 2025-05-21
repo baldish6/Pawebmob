@@ -1,3 +1,7 @@
+import User from "../models/User.js";
+import Image from "../models/Image.js";
+import { createError } from "../error.js";
+
 export const addImage = async (req,res,next) => {
     const newImage = new Image({ userId: req.user.id, ...req.body });
     try {
@@ -63,8 +67,29 @@ export const sub = async (req, res, next) => {
           return await Image.find({ userId: channelId });
         })
       );
-      
+
       res.status(200).json(list.flat().sort((a, b) => b.createdAt - a.createdAt));
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  export const search = async (req, res, next) => {
+    const query = req.query.q;
+    try {
+      const images = await Image.find({
+        title: { $regex: query, $options: "i" },
+      }).limit(40);
+      res.status(200).json(images);
+    } catch (err) {
+      next(err);
+    }
+  };
+  
+  export const random = async (req, res, next) => {
+    try {
+      const images = await Image.aggregate([{ $sample: { size: 40 } }]);
+      res.status(200).json(images);
     } catch (err) {
       next(err);
     }

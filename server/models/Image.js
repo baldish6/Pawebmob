@@ -25,4 +25,4 @@ const ImageSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Image", ImageSchema);
+export default mongoose.model("Image", ImageSchemaS);

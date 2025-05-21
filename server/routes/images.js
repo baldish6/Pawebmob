@@ -1,5 +1,5 @@
 import express from "express";
-import { addImage, deleteImage, updateImage, getImage } from "../controllers/image.js";
+import { addImage, deleteImage, updateImage, getImage,sub,search,random } from "../controllers/image.js";
 import { verifyToken } from "../verifyToken.js";
 
 const router = express.Router();
@@ -24,6 +24,6 @@ router.get("/search", search)
 
 // get random images
 router.get("/random", random)
-
+ 
 
 export default router;
