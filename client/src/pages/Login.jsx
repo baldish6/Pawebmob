@@ -44,11 +44,25 @@ const Login = () => {
         return  response.json();
     }
 
+    const LoginUser = async(data) =>{
 
-    //const navigate = useNavigate();
+      const response = await fetch("http://localhost:4000/api/auth/login", {
+          method: 'POST',
+          body: JSON.stringify(data),
+          'credentials': 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        });
+       
+      return response.json();
+  }
+
+
+    const navigate = useNavigate();
     const CreateUserMutation = useMutation({ mutationFn: CreateUser })
-    //const LoginUserMutation = useMutation({mutationFn:LoginUser})
-    //const userLoginStore = useUserStore((state) => state.addUser)
+    const LoginUserMutation = useMutation({mutationFn:LoginUser})
+    const userLoginStore = useUserStore((state) => state.addUser)
 
     const {
         register,
@@ -67,31 +81,14 @@ const Login = () => {
     }); 
 
    
-    const LoginUser = async(data) =>{
-
-        const response = await fetch("/auth/login", {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-              'Content-Type': 'application/json'
-            },
-          });
-         
-        const json = await  response.json();
-        return json;
-    }
-/*
-    const onSubmit = async (data) => {
-        console.log(data);
-        console.log("submitted")
-    }
-*/
+    
 
     const onSubmit = async (data) => {
               const responseData = CreateUserMutation.mutateAsync(data);
-              responseData.then((res)=>{
-                console.log(res);
-                console.log("congratulations")
+              responseData.then(()=>{
+                reset;
+               handleLogin(data);
+               navigate("/home");
               })
               .catch((errors)=>{
                 if(errors.name){
@@ -121,9 +118,10 @@ const Login = () => {
 
     const handleLogin = async (data) => {
         const responseData = LoginUserMutation.mutateAsync(data);
-        console.log(responseData);
-        //userLoginStore(responseData);
-
+        responseData
+        .then((res)=>{
+          userLoginStore(res);
+        });
       };
    
 
