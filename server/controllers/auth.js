@@ -56,6 +56,10 @@ export const login = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT,{expiresIn:"1h"});
     const { password, ...others } = user._doc;
 
+    delete req.body.password;
+
+   
+
     res
       .cookie("access_token", token, {
         httpOnly: true,

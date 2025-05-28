@@ -33,6 +33,7 @@ const Login = () => {
 
     const CreateUser = async(data) =>{
 
+      
         const response = await fetch('http://localhost:4000/api/auth/register', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -79,8 +80,6 @@ const Login = () => {
         },
         resolver:zodResolver(LoginSchema)
     }); 
-
-   
     
 
     const onSubmit = async (data) => {
@@ -147,7 +146,7 @@ const Login = () => {
               <Label htmlFor="name">Email</Label>
               <Input {...register("email")}  type="email" placeholder="email..."/>
               {errors.email && (
-                <span className="erro text-red-600">{errors.email.message}</span>
+                <span className="error text-red-600">{errors.email.message}</span>
               )}
             </div>
 

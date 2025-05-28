@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Image from './pages/Image';
 import NewImage from './pages/NewImage';
 import NotFound from './pages/NotFound';
+import Settings from './pages/Settings';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path='/'>
             <Route path='login' element={<Login/>}/>
             <Route path='home' element={<Home/>}/>
+            <Route path='settings' element={<Settings/>}/>
             <Route path="image">
               <Route path=":id" element={<Image />} />
               <Route path="new" element={<NewImage />} />

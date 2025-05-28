@@ -7,6 +7,7 @@ export const addImage = async (req,res,next) => {
     try {
       const savedImage = await newImage.save();
       res.status(200).json(savedImage);
+      //res.status(200).json("Image created");
     } catch (err) {
       next(err);
     }
@@ -15,7 +16,7 @@ export const addImage = async (req,res,next) => {
 export const getImage = async (req,res,next) => {
     try {
         const image = await Image.findById(req.params.id);
-        res.status(200).json(video);
+        res.status(200).json(image);
       } catch (err) {
         next(err);
       }

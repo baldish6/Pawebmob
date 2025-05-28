@@ -1,11 +1,11 @@
 import express from "express";
 import { addImage, deleteImage, updateImage, getImage,sub,search,random } from "../controllers/image.js";
-import { verifyToken } from "../verifyToken.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
 // create image
-router.put("/",verifyToken,addImage)
+router.post('/add',verifyToken,addImage)
 
 // read image
 router.get("/:id",verifyToken,getImage)
