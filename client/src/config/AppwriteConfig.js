@@ -6,5 +6,5 @@ client
     .setEndpoint(endpoint)
     .setProject(project_id)
     
-
 export default client;
+ 

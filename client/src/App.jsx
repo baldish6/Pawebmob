@@ -7,6 +7,7 @@ import Image from './pages/Image';
 import NewImage from './pages/NewImage';
 import NotFound from './pages/NotFound';
 import Settings from './pages/Settings';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path='login' element={<Login/>}/>
             <Route path='home' element={<Home/>}/>
             <Route path='settings' element={<Settings/>}/>
+            <Route path='profile/:id' element={<Profile/>}/>
             <Route path="image">
               <Route path=":id" element={<Image />} />
               <Route path="new" element={<NewImage />} />

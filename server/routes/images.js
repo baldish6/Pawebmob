@@ -1,6 +1,7 @@
 import express from "express";
 import { addImage, deleteImage, updateImage, getImage,sub,search,random } from "../controllers/image.js";
 import { verifyToken } from "../middleware/verifyToken.js";
+import { profilePost } from "../controllers/image.js";
 
 const router = express.Router();
 
@@ -24,6 +25,9 @@ router.get("/search", search)
 
 // get random images
 router.get("/random", random)
+
+// get all posted videos
+router.get("/profile/:id", profilePost)
  
 
 export default router;

@@ -9,56 +9,16 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form'
 import { Loader2 } from "lucide-react"
 import { zodResolver }  from "@hookform/resolvers/zod";
-import { z } from "zod" 
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useUserStore } from '@/store/UserSlice'
-
-
-const LoginSchema = z.object({
-    name:z.string().min(1,"Name is required"),
-    email: z.string().email(),
-    password:z.string().min(8, "Password must be at least 8 characters"), 
-    confirmPassword:z.string().min(8, "Confirmed password must be at least 8 characters")
-}).refine(data => data.password==data.confirmPassword,{
-    message: "Password must match",
-    path:["confirmPassword"],
-});
+import { CreateUser, LoginUser} from '@/services/api/AuthCall'
+import { LoginSchema } from '@/lib/schema/LoginSchema'
 
 const Login = () => {
-
-    const CreateUser = async(data) =>{
-
-      
-        const response = await fetch('http://localhost:4000/api/auth/register', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-              'Content-Type': 'application/json'
-            },
-          });
-
-        return  response.json();
-    }
-
-    const LoginUser = async(data) =>{
-
-      const response = await fetch("http://localhost:4000/api/auth/login", {
-          method: 'POST',
-          body: JSON.stringify(data),
-          'credentials': 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        });
-       
-      return response.json();
-  }
-
 
     const navigate = useNavigate();
     const CreateUserMutation = useMutation({ mutationFn: CreateUser })

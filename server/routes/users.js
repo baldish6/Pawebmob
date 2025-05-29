@@ -3,7 +3,7 @@ import {
     getUser,update,deleteUser,subscribe,unsubscribe,
     likeImage,dislikeImage,saveImage,removeSaveImage
  } from "../controllers/user.js";
- import { verifyToken } from "../verifyToken.js";
+ import { verifyToken } from "../middleware/verifyToken.js";
 
 
 const router = express.Router();

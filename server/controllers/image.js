@@ -95,3 +95,12 @@ export const sub = async (req, res, next) => {
       next(err);
     }
   };
+
+  export const profilePost = async (req,res,next)=>{
+    try {
+      const list = await Image.find({ userId: req.params.id });
+      res.status(200).json(list.flat().sort((a, b) => b.createdAt - a.createdAt));
+    } catch (err) {
+      next(err);
+    }
+  }

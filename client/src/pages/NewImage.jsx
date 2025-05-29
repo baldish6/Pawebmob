@@ -1,54 +1,18 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from "@/components/ui/label"
-import React, { useState } from 'react'
 import { ID, Storage} from 'appwrite'
 import client from '@/config/AppwriteConfig'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { zodResolver }  from "@hookform/resolvers/zod";
-import {  z } from "zod" 
 import { useForm } from 'react-hook-form'
 import { useNavigate } from "react-router-dom";
-
-
-const MAX_FILE_SIZE = 500000;
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
-
-const PostSchema = z.object({
-    title:z.string()
-    .min(1,"Title is required")
-    .max(300,"Max 300 characters"), 
-    image: z
-    .any()
-    .refine((files) => files?.length == 1, "Image is required.")
-    .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
-    .refine(
-      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      ".jpg, .jpeg, .png and .webp files are accepted."
-    ),
-    desc:z.string().optional()
-});
+import { CreatePost } from '@/services/api/ImageCall'
+import { PostSchema } from '@/lib/schema/PostSchema'
 
 const NewImage = () => {
 
-  const CreatePost = async(data) =>{
-      
-    const response = await fetch('http://localhost:4000/api/img/add', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        'credentials': 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      });
-  
-    return  response.json();
-  }
-  
-
-
-
-const navigate = useNavigate();
+///const navigate = useNavigate();
 const CreatePostMutation = useMutation({ mutationFn: CreatePost })
 
 const {
@@ -67,10 +31,12 @@ const {
     }); 
     
 
-const storage = new Storage(client);
 
 const onSubmit = (data) => {
   console.log(data);
+
+  
+const storage = new Storage(client);
 
   const promise = storage.createFile(
     '682f15180037da65c98f',
@@ -83,7 +49,7 @@ const onSubmit = (data) => {
     console.log(response); // Success
     console.log(response.$id); 
     console.log(response.bucketId); 
-    const imgUrl = response.bucketId+','+response.$id;
+    const imgUrl = "b="+ response.bucketId+'%26i='+response.$id;
     var datapost = {};
     datapost.title = data.title;
     datapost.desc = data.desc;

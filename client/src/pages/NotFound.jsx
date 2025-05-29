@@ -1,11 +1,13 @@
 import React from 'react'
-import { Button } from "@/components/ui/button"
-
+import { useLocation } from 'react-router-dom'
 const NotFound = () => {
+  const {pathname} = useLocation();
+
   return (
-    <div><div className="flex flex-col items-center justify-center min-h-svh">
-        <Button onClick={()=>{console.log("clicked")}} >Click me</Button>
-      </div></div>
+    <div>
+      <h1>404 Not found</h1>
+      <h1>Bad Url : the URL <b className='text-2xl'>{pathname}</b> does not exist</h1>
+      </div>
   )
 }
 

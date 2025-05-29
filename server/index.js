@@ -3,9 +3,8 @@ import mongoose from "mongoose"
 import dotenv from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser";
-/*
 import userRoutes from "./routes/users.js"
-import commentRoutes from "./routes/comments.js"
+/*import commentRoutes from "./routes/comments.js"
 */
 import authRoutes from "./routes/auth.js"
 import imageRoutes from "./routes/images.js"
@@ -33,6 +32,8 @@ app.use("/api/comments", commentRoutes)
 */
 app.use('/api/auth', authRoutes);
 app.use('/api/img', imageRoutes);
+app.use('/api/users', userRoutes);
+
 
 
 app.use((req, res, next) => {
