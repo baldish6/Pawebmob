@@ -70,3 +70,14 @@ export const login = async (req, res, next) => {
     throw err;
   }
 };
+
+export const logout = async(req,res)=>{
+
+res
+      .cookie("access_token","", {
+        httpOnly: true,
+        maxAge:1
+      })
+      .status(200)
+      .json({ success: true });
+}

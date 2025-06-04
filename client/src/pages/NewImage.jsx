@@ -46,19 +46,15 @@ const storage = new Storage(client);
   
   promise.then(function (response) {
 
-    console.log(response); // Success
-    console.log(response.$id); 
-    console.log(response.bucketId); 
+    
     const imgUrl = "b="+ response.bucketId+'%26i='+response.$id;
     var datapost = {};
     datapost.title = data.title;
     datapost.desc = data.desc;
     datapost.imgUrl = imgUrl;
-    console.log("datapost");
-    console.log(datapost);
+   
     const responseData = CreatePostMutation.mutateAsync(datapost);
-    console.log("responseData");
-    console.log(responseData);
+   
     responseData.then(()=>{
      reset;
      //navigate("/images"+'k');

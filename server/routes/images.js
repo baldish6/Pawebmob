@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/add',verifyToken,addImage)
 
 // read image
-router.get("/:id",verifyToken,getImage)
+router.get("/:id",getImage)
 
 // update image
 router.put("/:id",verifyToken,updateImage)

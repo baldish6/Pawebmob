@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -16,7 +16,7 @@ import { zodResolver }  from "@hookform/resolvers/zod";
 import { useMutation } from '@tanstack/react-query'
 import { useUserStore } from '@/store/UserSlice'
 import { CreateUser, LoginUser} from '@/services/api/AuthCall'
-import { LoginSchema } from '@/lib/schema/LoginSchema'
+import { LoginSchema, RegisterSchema } from '@/lib/schema/LoginSchema'
 
 const Login = () => {
 
@@ -24,6 +24,8 @@ const Login = () => {
     const CreateUserMutation = useMutation({ mutationFn: CreateUser })
     const LoginUserMutation = useMutation({mutationFn:LoginUser})
     const userLoginStore = useUserStore((state) => state.addUser)
+
+    const [isLogin,setIsLogin] = useState(false);
 
     const {
         register,
@@ -38,8 +40,24 @@ const Login = () => {
             password:'',
             confirmPassword:''
         },
-        resolver:zodResolver(LoginSchema)
+        resolver:zodResolver(RegisterSchema)
     }); 
+
+    const {
+      register:register2,
+      handleSubmit: handleSubmit2,
+      formState:{errors:errors2, isSubmitting:isSubmitting2},
+      reset:reset2,
+      setError:setError2,
+  } = useForm({
+      defaultValues:{
+          email:'',
+          password:'',
+      },
+      resolver:zodResolver(LoginSchema)
+  }); 
+
+
     
 
     const onSubmit = async (data) => {
@@ -47,7 +65,6 @@ const Login = () => {
               responseData.then(()=>{
                 reset;
                handleLogin(data);
-               navigate("/home");
               })
               .catch((errors)=>{
                 if(errors.name){
@@ -80,7 +97,24 @@ const Login = () => {
         responseData
         .then((res)=>{
           userLoginStore(res);
-        });
+          reset2;
+          navigate("/home");
+        })
+        .catch((errors2)=>{
+          if(errors2.email){
+            setError2("email",{
+                type:"server",
+                message: errors2.email,
+    })
+    }else if(errors2.password){
+            setError2("password",{
+                type:"server",
+                message: errors2.password,
+            })
+        }
+
+        })
+        ;
       };
    
 
@@ -91,6 +125,47 @@ const Login = () => {
         <CardTitle>Register</CardTitle>
       </CardHeader>
       <CardContent>
+
+        { isLogin ? 
+
+<form onSubmit={handleSubmit2(handleLogin)}>
+<div className="grid w-full items-center gap-4">
+  <div className="flex flex-col space-y-1.5">
+    <Label htmlFor="name">Email</Label>
+    <Input {...register2("email")}  type="email" placeholder="email..."/>
+    {errors2.email && (
+      <span className="error text-red-600">{errors2.email.message}</span>
+    )}
+  </div>
+
+  <div className="flex flex-col space-y-1.5">
+    <Label htmlFor="name">Password</Label>
+    <Input {...register2("password")}  type="password" placeholder="password"/>
+    {errors2.password && (
+      <span className="error text-red-600">{errors2.password.message}</span>
+    )}
+  </div>
+</div>
+
+{
+  isSubmitting2 ? 
+  <Loader2>Loading....</Loader2>
+   :
+
+  <>
+
+<div>
+<Button type="submit" >Login</Button> 
+</div>
+<h1 className='underline' onClick={()=>setIsLogin(false)}>Go to Register</h1>
+  
+  </>
+}
+
+</form>
+
+        :
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid w-full items-center gap-4">
 
@@ -127,10 +202,25 @@ const Login = () => {
             </div>
 
           </div>
-          <div>
-          <Button type="submit" >Register</Button> 
-          </div>
+          {
+            isSubmitting ?
+            <Loader2>Loading....</Loader2>
+            :
+
+            <>
+            <div>
+            <Button type="submit" >Register</Button> 
+            </div>
+            <h1 className='underline' onClick={()=>setIsLogin(true)}>Go to Login</h1>
+            </>
+           
+
+          }
+         
         </form>
+
+            }
+
       </CardContent>
     </Card>
     </div>

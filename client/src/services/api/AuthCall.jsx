@@ -25,3 +25,15 @@ export const LoginUser = async(data) =>{
    
   return response.json();
 }
+
+export const LogOutUser = async()=>{
+  const response = await fetch("http://localhost:4000/api/auth/logout",{
+    method:'GET',
+    'credentials': 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+ });
+
+ return response;
+}

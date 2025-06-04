@@ -1,6 +1,6 @@
 import client from '@/config/AppwriteConfig';
 import React from 'react';
-import { ID, Storage} from 'appwrite'
+import { Storage} from 'appwrite'
 
 const ImageCard = ({image}) => {
    
@@ -13,9 +13,11 @@ const result = storage.getFileView(bucket_id, file_id);
 
 return(
     <div>
-        <h1>{image.title}</h1>
+        <a href={'http://localhost:5173/image/'+image._id}>
+        <h1>ooo</h1>
         <img src={result}></img>
         <h1>{image.desc}</h1>
+        </a>
     </div>
 )
 
