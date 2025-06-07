@@ -8,21 +8,21 @@ import NewImage from './pages/NewImage';
 import NotFound from './pages/NotFound';
 import Settings from './pages/Settings';
 import Profile from './pages/Profile';
+import NavBar from './components/NavBar';
 
 
 function App() {
   return (
     <div>
+       <NavBar/>
        <Routes>
-        <Route path='/'>
-            <Route path='login' element={<Login/>}/>
-            <Route path='home' element={<Home/>}/>
-            <Route path='settings' element={<Settings/>}/>
-            <Route path='profile/:id' element={<Profile/>}/>
-            <Route path="image">
+       <Route  path='/login' element={<Login/>}/>
+            <Route path='/home' element={<Home/>}/>
+            <Route path='/settings' element={<Settings/>}/>
+            <Route path='/profile/:id' element={<Profile/>}/>
+            <Route path="/image">
               <Route path=":id" element={<Image />} />
               <Route path="new" element={<NewImage />} />
-            </Route>
         </Route>
         <Route path="*" element={<NotFound/>} />
        </Routes>

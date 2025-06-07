@@ -20,12 +20,14 @@ import { LoginSchema, RegisterSchema } from '@/lib/schema/LoginSchema'
 
 const Login = () => {
 
+  //const UserId = useUserStore(((state) => state.UserId));
+
     const navigate = useNavigate();
     const CreateUserMutation = useMutation({ mutationFn: CreateUser })
     const LoginUserMutation = useMutation({mutationFn:LoginUser})
-    const userLoginStore = useUserStore((state) => state.addUser)
+    const {setUserId,setUserName} = useUserStore();
 
-    const [isLogin,setIsLogin] = useState(false);
+    const [isLogin,setIsLogin] = useState(true);
 
     const {
         register,
@@ -96,7 +98,9 @@ const Login = () => {
         const responseData = LoginUserMutation.mutateAsync(data);
         responseData
         .then((res)=>{
-          userLoginStore(res);
+          //console.log(res)
+          setUserId(res._id);
+          setUserName(res.name)
           reset2;
           navigate("/home");
         })
