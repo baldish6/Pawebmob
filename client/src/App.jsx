@@ -16,11 +16,12 @@ function App() {
     <div>
        <NavBar/>
        <Routes>
+       <Route  path='/' element={<Login/>}/>
        <Route  path='/login' element={<Login/>}/>
-            <Route path='/home' element={<Home/>}/>
-            <Route path='/settings' element={<Settings/>}/>
-            <Route path='/profile/:id' element={<Profile/>}/>
-            <Route path="/image">
+       <Route path='/home' element={<Home/>}/>
+       <Route path='/settings' element={<Settings/>}/>
+       <Route path='/profile/:id' element={<Profile/>}/>
+       <Route path="/image">
               <Route path=":id" element={<Image />} />
               <Route path="new" element={<NewImage />} />
         </Route>

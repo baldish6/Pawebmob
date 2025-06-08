@@ -9,7 +9,7 @@ import CommentInput from '@/components/CommentInput'
 const Image = () => {
 
   const { id } = useParams();
-  const { currentUser } = useUserStore()
+  const {UserId} = useUserStore();
 
     const {data,isLoading,isError,error}= useQuery({
         queryFn:()=>GetPostById(id),
@@ -23,12 +23,11 @@ const Image = () => {
         return(<div><h1>{JSON.stringify(error)}</h1></div>)
     }
 
-    console.log(data)
 
   return (
     <div>
-      <ImageCard image={data}></ImageCard>
-      {currentUser==null && <CommentInput/> }
+      <ImageCard key={data._id} singleImage={true}  image={data}></ImageCard>
+      {UserId!="" && <CommentInput/> }
     </div>
   )
 }

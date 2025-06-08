@@ -26,7 +26,7 @@ router.get("/search", search)
 // get random images
 router.get("/random", random)
 
-// get all posted videos
+// get all posted images
 router.get("/profile/:id", profilePost)
  
 

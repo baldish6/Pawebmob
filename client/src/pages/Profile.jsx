@@ -24,7 +24,7 @@ const Profile = () => {
     <div>
         <h1>Posts</h1>
         {images?.map((image)=>{
-           return (<ImageCard image={image} />)
+           return (<ImageCard key={image._id} singleImage={false} image={image} />)
         })}
     </div>
   )

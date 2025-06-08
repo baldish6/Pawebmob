@@ -126,7 +126,7 @@ const Login = () => {
     <div className='flex'>  
         <Card className="w-[350px] absolute m-auto left-0 right-0 top-1/5">
       <CardHeader>
-        <CardTitle>Register</CardTitle>
+        <CardTitle>{!isLogin?"Register":"Login"}</CardTitle>
       </CardHeader>
       <CardContent>
 
