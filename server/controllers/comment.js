@@ -27,6 +27,22 @@ export const deleteComment = async (req, res, next) => {
   }
 };
 
+
+export const deletePostComment = async (req, res, next) => {
+  try {
+    const image = await Image.findById(req.params.imageId);
+    if (!image) return next(createError(404, "Image not found!"));
+    if (req.user.id === image.userId) {
+      await Comment.deleteMany({
+      imageId : req.params.imageId
+      }).catch((error) => next(err))
+      res.status(200).json("The comments of this post have been deleted.");
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const updateComment = async (req, res, next) => {
     try {
       const comment = await Comment.findById(req.params.id);

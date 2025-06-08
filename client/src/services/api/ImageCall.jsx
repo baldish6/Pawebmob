@@ -29,3 +29,27 @@ export const GetPostById = async(id)=>{
     });
     return  response.json();
 }
+
+export const DeletePost = async(id)=>{
+  const response = await fetch('http://localhost:4000/api/img/'+id,{
+     method:'DELETE',
+     'credentials': 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+  });
+  return  response.json();
+}
+
+export const DeletePostComments = async(id)=>{
+  const response = await fetch('http://localhost:4000/api/comment/imgdl/'+id,{
+     method:'DELETE',
+     'credentials': 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+  });
+  return  response.json();
+}
+
+
