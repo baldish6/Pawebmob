@@ -1,6 +1,7 @@
 import { useUserStore } from '@/store/UserSlice'
 import React from 'react'
 import { Link } from 'react-router-dom';
+import AvatarProfile from './AvatarProfile';
 
 const NavBar = () => {
 
@@ -25,6 +26,7 @@ const NavBar = () => {
     </li>
 </ul>
 <h1>{UserName}</h1>
+<AvatarProfile/>
 </div>
     
     }

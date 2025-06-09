@@ -21,6 +21,9 @@ const UserSchema = new mongoose.Schema(
     subscribedUsers: {
       type: [String],
     },
+    avatarUrl: {
+      type: String,
+    },
     savedImages: {
         type: [String],
       },

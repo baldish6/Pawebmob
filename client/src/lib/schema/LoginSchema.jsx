@@ -1,4 +1,5 @@
 import {  z } from "zod" 
+import { ImageFileSchema} from "./PostSchema"
 
 const NameSchema = z.object({
     name:z.string().min(1,"Name is required")
@@ -16,9 +17,14 @@ const ConfirmPasswordSchema = z.object({
     confirmPassword:z.string().min(8, "Confirmed password must be at least 8 characters")
 })
 
+
+const AvatarSchema = z.object({
+    avatarUrl:z.string().optional(),
+}).merge(ImageFileSchema.partial());
+
 export const LoginSchema = EmailSchema.merge(PasswordSchema);
 
-export const RegisterSchema = ((LoginSchema.merge(NameSchema)).merge(ConfirmPasswordSchema))
+export const RegisterSchema = (((LoginSchema.merge(NameSchema)).merge(ConfirmPasswordSchema))).merge(AvatarSchema)
 .refine(data => data.password==data.confirmPassword,{
     message: "Password must match",
     path:["confirmPassword"],

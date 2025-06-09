@@ -16,9 +16,11 @@ export const useUserStore = create()(
     (set) => ({
       UserId: "",
   UserName: "",
+  UserAvatar: "",
   setUserId: (UserId) => set(() => ({ UserId: UserId })),
   setUserName: (UserName) => set(()=>({UserName:UserName})),
-  logout:()=>set({UserId:"",UserName: ""})
+  setUserAvatar: (UserAvatar) => set(()=>({UserAvatar:UserAvatar})),
+  logout:()=>set({UserId:"",UserName: "",UserAvatar:""})
     }),
     {
       name: 'user-storage', // name of the item in the storage (must be unique)

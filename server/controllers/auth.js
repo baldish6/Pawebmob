@@ -10,7 +10,8 @@ const LoginSchema = z.object({
     name:z.string(),
     email: z.string().email(),
     password:z.string().min(8, "Password must be at least 8 characters"), 
-    confirmPassword:z.string().min(8, "Confirmed password must be at least 8 characters")
+    confirmPassword:z.string().min(8, "Confirmed password must be at least 8 characters"),
+    avatarUrl:z.string().optional(),
 }).refine(data => data.password==data.confirmPassword,{
     message: "Password must match",
     path:["confirmPassword"],

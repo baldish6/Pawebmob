@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { CreatePost } from '@/services/api/ImageCall'
 import { PostSchema } from '@/lib/schema/PostSchema'
 import { useState } from 'react'
+import { ImageAppWriteUpload } from '@/lib/AppWriteUtil'
+import { getImgUrl } from '@/lib/GetImgUrl'
 
 const NewImage = () => {
 
@@ -29,7 +31,8 @@ const {
         defaultValues:{
             title:'',
             image:undefined,
-            desc:undefined
+            desc:undefined,
+            imgUrl:undefined
         },
         resolver:zodResolver(PostSchema)
     }); 
@@ -42,25 +45,13 @@ const onSubmit = (data) => {
 
   setIsLoadingUpload(true)
 
+   const response = ImageAppWriteUpload(data.image[0]);
   
-const storage = new Storage(client);
-
-  const promise = storage.createFile(
-    '682f15180037da65c98f',
-    ID.unique(),
-    data.image[0]
-  );
+    response.then((res)=>{
   
-  promise.then(function (response) {
-
-    
-    const imgUrl = "b="+ response.bucketId+'%26i='+response.$id;
-    var datapost = {};
-    datapost.title = data.title;
-    datapost.desc = data.desc;
-    datapost.imgUrl = imgUrl;
+          data['imgUrl'] = getImgUrl(res);
    
-    const responseData = CreatePostMutation.mutateAsync(datapost);
+    const responseData = CreatePostMutation.mutateAsync(data);
    
     responseData.then(()=>{
      reset();
@@ -71,13 +62,11 @@ const storage = new Storage(client);
       setIsLoadingUpload(false);
       console.log(error); // Failure
     })
-
-  }, function (error) {
-    setIsLoadingUpload(false);
-
+  })
+  , function (error) {
     console.log(error); // Failure
-  });
-}
+  }
+  }
 
 if(isLoadingUpload){
   return <div>Uploading Post ... </div>
@@ -94,10 +83,11 @@ if(isLoadingUpload){
                 <span className="error text-red-600">{errors.image.message}</span>
               )}
               {
-                // watchImg!=undefined && console.log(watchImg[0])
+
+               // watchImg!=undefined && console.log(watchImg[0])
                watchImg!=undefined && watchImg.length > 0 && (
                   <img src={URL.createObjectURL(watchImg[0])} alt="alt" />
-              )
+            )  
               }
       <Label>Title</Label>
       <Input type="text"   {...register("title")} placeholder="Title"></Input>

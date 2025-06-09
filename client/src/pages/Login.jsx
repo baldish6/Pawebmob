@@ -17,6 +17,14 @@ import { useMutation } from '@tanstack/react-query'
 import { useUserStore } from '@/store/UserSlice'
 import { CreateUser, LoginUser} from '@/services/api/AuthCall'
 import { LoginSchema, RegisterSchema } from '@/lib/schema/LoginSchema'
+import { ImageAppWriteUpload } from '@/lib/AppWriteUtil'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import { getImgUrl } from '@/lib/GetImgUrl'
+
 
 const Login = () => {
 
@@ -25,7 +33,7 @@ const Login = () => {
     const navigate = useNavigate();
     const CreateUserMutation = useMutation({ mutationFn: CreateUser })
     const LoginUserMutation = useMutation({mutationFn:LoginUser})
-    const {setUserId,setUserName} = useUserStore();
+    const {setUserId,setUserName,setUserAvatar} = useUserStore();
 
     const [isLogin,setIsLogin] = useState(true);
 
@@ -35,15 +43,22 @@ const Login = () => {
         formState:{errors, isSubmitting},
         reset,
         setError,
+        watch,
+        setValue
     } = useForm({
         defaultValues:{
             name:'',
             email:'',
             password:'',
-            confirmPassword:''
+            confirmPassword:'',
+            avatarUrl:"",
+            image:undefined,
         },
         resolver:zodResolver(RegisterSchema)
     }); 
+
+    const watchImg = watch('image');
+
 
     const {
       register:register2,
@@ -63,6 +78,15 @@ const Login = () => {
     
 
     const onSubmit = async (data) => {
+
+      //console.log(data.image[0]);
+
+      const response = ImageAppWriteUpload(data.image[0]);
+
+      response.then((res)=>{
+
+        data['avatarUrl'] = getImgUrl(res);
+        //console.log(data);
               const responseData = CreateUserMutation.mutateAsync(data);
               responseData.then(()=>{
                 reset;
@@ -92,7 +116,11 @@ const Login = () => {
                       })
                   }
               })
+            })
+            , function (error) {
+              console.log(error); // Failure
             }
+             } 
 
     const handleLogin = async (data) => {
         const responseData = LoginUserMutation.mutateAsync(data);
@@ -101,6 +129,7 @@ const Login = () => {
           //console.log(res)
           setUserId(res._id);
           setUserName(res.name)
+          setUserAvatar(res.avatarUrl)
           reset2;
           navigate("/home");
         })
@@ -173,6 +202,35 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid w-full items-center gap-4">
 
+          <div className="flex flex-col space-y-1.5">
+          <Label>Avatar</Label>
+      <Input type="file"  {...register("image")}   placeholder="file..." accept="image/*"/>
+      {errors.image && (
+                <span className="error text-red-600">{errors.image.message}</span>
+              )}
+              {
+               // watchImg!=undefined && console.log(watchImg[0])
+               watchImg!=undefined && watchImg.length > 0 && (
+                <div className='flex'>
+                <Avatar className='w-16 h-16'>
+        <AvatarImage src={URL.createObjectURL(watchImg[0])} alt="alt" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <Button type="button" onClick={()=>{setValue("image",undefined)}}>x</Button>
+                </div>
+            )
+            ||
+            ((watchImg==undefined) && (
+              <Avatar className='w-16 h-16'>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+            ))
+              }
+            </div>
+
+
+
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Name</Label>
               <Input {...register("name")} type="text" placeholder="Name"/>
@@ -215,7 +273,10 @@ const Login = () => {
             <div>
             <Button type="submit" >Register</Button> 
             </div>
-            <h1 className='underline' onClick={()=>setIsLogin(true)}>Go to Login</h1>
+            <h1 className='underline' onClick={()=>{
+              reset();
+              setIsLogin(true)
+              }}>Go to Login</h1>
             </>
            
 
