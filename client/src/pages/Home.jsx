@@ -1,5 +1,4 @@
 import React from 'react'
-import { useUserStore } from '@/store/UserSlice'
 
 const Home = () => {
 

@@ -1,12 +1,9 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from "@/components/ui/label"
-import { ID, Storage} from 'appwrite'
-import client from '@/config/AppwriteConfig'
 import { useMutation } from '@tanstack/react-query'
 import { zodResolver }  from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form'
-import { useNavigate } from "react-router-dom";
 import { CreatePost } from '@/services/api/ImageCall'
 import { PostSchema } from '@/lib/schema/PostSchema'
 import { useState } from 'react'
@@ -15,9 +12,7 @@ import { getImgUrl } from '@/lib/GetImgUrl'
 
 const NewImage = () => {
 
-///const navigate = useNavigate();
 const CreatePostMutation = useMutation({ mutationFn: CreatePost })
- const navigate = useNavigate();
  const [isLoadingUpload,setIsLoadingUpload] = useState(false);
 
 const {
@@ -56,7 +51,6 @@ const onSubmit = (data) => {
     responseData.then(()=>{
      reset();
      setIsLoadingUpload(false);
-     //navigate("/images"+'k');
     })
     .catch((error)=>{
       setIsLoadingUpload(false);

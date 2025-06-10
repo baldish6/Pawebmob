@@ -18,3 +18,16 @@ export const GetUserById = async(id)=>{
    return  response.json();
 }
 
+export const UpdateUser = async({data,UserId})=>{
+   const response = await fetch('http://localhost:4000/api/user/'+UserId, {
+      method:'PUT',
+      body: JSON.stringify(data),
+      'credentials': 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+   });
+   return  response.json();
+}
+
+
