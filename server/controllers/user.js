@@ -1,6 +1,7 @@
 import { createError } from "../error.js";
 import User from "../models/User.js";
 import Image from "../models/Image.js";
+import Comment from "../models/Comment.js";
 
 export const getUser = async (req,res,next)=>{
     try {
@@ -33,6 +34,27 @@ export const updateUser = async (req,res,next)=>{
 export const deleteUser  = async (req,res,next)=>{
     if (req.params.id === req.user.id) {
         try {
+
+
+          // delete all comments linked to this user images
+          const records = await Image.find({  userId : req.params.id });
+          for (let i = 0; i < records.length; i++) {  
+            const img_id = records[i]._id;
+            await Comment.deleteMany({
+              imageId : img_id
+              }).catch((error) => next(err))
+        }
+
+          // delete his posts
+          await Image.deleteMany({
+            userId : req.params.id
+            }).catch((error) => next(err))
+
+          // delete his comments
+        await Comment.deleteMany({
+          userId : req.params.id
+          }).catch((error) => next(err))
+          // delete user
           await User.findByIdAndDelete(req.params.id);
           res.status(200).json("User has been deleted.");
         } catch (err) {

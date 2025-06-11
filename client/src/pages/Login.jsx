@@ -18,7 +18,7 @@ import { useUserStore } from "@/store/UserSlice";
 import { LoginUser } from "@/services/api/AuthCall";
 import { LoginSchema, RegisterSchema } from "@/lib/schema/LoginSchema";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import UserInfo from "./UserInfo";
+import UserInfo from "../components/UserInfo";
 
 const Login = () => {
     //const UserId = useUserStore(((state) => state.UserId));

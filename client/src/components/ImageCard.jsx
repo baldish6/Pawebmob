@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { DeletePostComments } from "@/services/api/ImageCall";
 import { useParams } from "react-router-dom";
 import { ImageAppWriteDelete } from "@/lib/AppWriteUtil";
+import LikeImg from "./LikeImg";
 const ImageBody = ({ image, singleImage }) => {
     const DeletePostMutation = useMutation({ mutationFn: DeletePost });
     const DeletePostCommentsMutation = useMutation({
@@ -62,6 +63,7 @@ const ImageCard = ({ image, singleImage }) => {
                     <ImageBody singleImage={singleImage} image={image} />
                 </a>
             )}
+<LikeImg/>
         </div>
     );
 };

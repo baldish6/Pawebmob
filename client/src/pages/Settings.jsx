@@ -4,14 +4,22 @@ import { useUserStore } from "@/store/UserSlice";
 import { useMutation } from "@tanstack/react-query";
 import { LogOutUser } from "@/services/api/AuthCall";
 import { useNavigate } from "react-router-dom";
-import UserInfo from "./UserInfo";
+import UserInfo from "../components/UserInfo";
+import DelUs from "@/components/DelUs";
+import { DeleteUser } from "@/services/api/UserCall";
 
 const Settings = () => {
     const navigate = useNavigate();
     const { logout } = useUserStore();
     const LogOutUserMutation = useMutation({ mutationFn: LogOutUser });
-    const { setUserId, setUserName, setUserEmail, setUserAvatar } =
-        useUserStore();
+    const {
+        UserId,
+        UserAvatar,
+        setUserId,
+        setUserName,
+        setUserEmail,
+        setUserAvatar,
+    } = useUserStore();
 
     const LogoutUser = () => {
         logout();
@@ -32,11 +40,14 @@ const Settings = () => {
         setUserEmail(res.email);
         navigate("/home");
     };
+       
+   
 
     return (
         <div>
             Settings
             <UserInfo setIsLogin={undefined} handleLogin={handleUpdate} />
+            <DelUs/>
             <Button onClick={LogoutUser}>Logout</Button>
         </div>
     );

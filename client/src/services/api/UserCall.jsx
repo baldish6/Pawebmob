@@ -1,16 +1,3 @@
-
-
-/*export const GetUserPosts = async(user_id)=>{
-    const response = await fetch('http://localhost:4000/api/find/'+user_id,{
-       method:'GET',
-       'credentials': 'include',
-       headers: {
-         'Content-Type': 'application/json'
-       },
-    });
-    return  response.json();
-}
-*/
 export const GetUserById = async(id)=>{
    const response = await fetch('http://localhost:4000/api/user/find/'+id,{
       method:'GET'
@@ -30,4 +17,15 @@ export const UpdateUser = async({data,UserId})=>{
    return  response.json();
 }
 
-
+//DeleteUser
+export const DeleteUser = async(UserId)=>{
+   
+   const response = await fetch('http://localhost:4000/api/user/'+UserId, {
+      method:'DELETE',
+      'credentials': 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+   });
+   return  response.json();
+}

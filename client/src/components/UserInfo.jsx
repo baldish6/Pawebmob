@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { CreateUser } from "@/services/api/AuthCall";
 import { useForm } from "react-hook-form";
@@ -13,11 +13,13 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { useUserStore } from "@/store/UserSlice";
 import { UpdateUser } from "@/services/api/UserCall";
+import AvatarProfile from "@/components/AvatarProfile";
 
 const UserInfo = ({ setIsLogin, handleLogin }) => {
     const { UserName, UserAvatar, UserEmail, UserId } = useUserStore();
     const CreateUserMutation = useMutation({ mutationFn: CreateUser });
     const UpdateUserMutation = useMutation({ mutationFn: UpdateUser });
+    const [editProfile,setEditProfile] = useState(false);
 
     const {
         register,
@@ -120,8 +122,28 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
             };
     };
 
+    if(setIsLogin==undefined&&editProfile==false){
+        return(
+            //UserName, UserAvatar, UserEmail, UserId
+            <>
+            <Avatar className="w-16 h-16 ">
+        <AvatarImage  src={UserAvatar} alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+            <h1>{UserName}</h1>
+            <h1>{UserEmail}</h1>
+            <Button onClick={()=>{setEditProfile(true)}}>Edit</Button>
+            </>
+            
+        )
+    }
+
     return (
         <div>
+            {setIsLogin==undefined && <Button onClick={()=>{
+                reset();
+                setEditProfile(false)
+                }}>undo Edit</Button>}
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid w-full items-center gap-4">
                     <div className="flex flex-col space-y-1.5">
