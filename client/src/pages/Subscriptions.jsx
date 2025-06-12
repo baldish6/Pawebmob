@@ -1,17 +1,14 @@
-import { GetUserPosts } from '@/services/api/ImageCall'
-import { useQuery } from '@tanstack/react-query'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { GetSubscribedPosts } from '@/services/api/ImageCall'
+//import { ImageCard } from '@/components/ImageCard'
 import ImageCard from '@/components/ImageCard'
-import SubButton from '@/components/SubButton'
 
-const Profile = () => {
+const Subscriptions = () => {
 
-
-    const { id } = useParams();
     const {data:images,isLoading,isError,error}= useQuery({
-        queryFn:()=>GetUserPosts(id),
-        queryKey:["getUserInfo",{id}],
+        queryFn:()=>GetSubscribedPosts(),
+        queryKey:["GetSubscribedPosts"],
     })
 
     if (isLoading){
@@ -20,19 +17,17 @@ const Profile = () => {
     if(isError){
         return(<div><h1>{JSON.stringify(error)}</h1></div>)
     }
-
     
 
   return (
     <div>
-        <SubButton/>
-        
         <h1>Posts</h1>
         {images?.map((image)=>{
            return (<ImageCard key={image._id} singleImage={false} image={image} />)
         })}
     </div>
   )
+
 }
 
-export default Profile
+export default Subscriptions

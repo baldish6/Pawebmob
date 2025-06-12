@@ -1,5 +1,5 @@
 import express from "express";
-import { addImage, deleteImage, updateImage, getImage,sub,search,random } from "../controllers/image.js";
+import { addImage, deleteImage, updateImage, getImage,search,random,GetSub } from "../controllers/image.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 import { profilePost } from "../controllers/image.js";
 
@@ -7,6 +7,12 @@ const router = express.Router();
 
 // create image
 router.post('/add',verifyToken,addImage)
+
+// get subscribed users images
+router.get("/getSub",verifyToken, GetSub);
+
+// get random images
+router.get("/random", random);
 
 // read image
 router.get("/:id",getImage)
@@ -17,14 +23,10 @@ router.put("/:id",verifyToken,updateImage)
 // delete image
 router.delete("/:id",verifyToken,deleteImage)
 
-// get subscribed users images
-router.get("/sub",verifyToken, sub)
-
 // get images by search function
-router.get("/search", search)
+router.get("/search/:searchParam", search)
 
-// get random images
-router.get("/random", random)
+
 
 // get all posted images
 router.get("/profile/:id", profilePost)

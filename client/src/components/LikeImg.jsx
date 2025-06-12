@@ -1,20 +1,67 @@
 import React, { useState } from 'react'
 import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
+import { useMutation } from '@tanstack/react-query';
+import { LikePost,DislikePost } from '@/services/api/UserCall';
+const LikeImg = ({ImageId,likeValue}) => {
 
-const LikeImg = () => {
-
-    const [liked,setLiked]= useState(false);
+    const [liked,setLiked]= useState(likeValue);
+    const LikeMutation = useMutation({
+        mutationFn: LikePost,
+    });
+    const DislikeMutation = useMutation({
+        mutationFn: DislikePost,
+    });
 
     const changeLike = () =>{
-        console.log('hbjbj')
-    }
+        
+        setLiked(!liked);
 
+        if(liked){
+            const responseData = DislikeMutation.mutateAsync(ImageId);
+
+            responseData
+                .then(() =>{})
+                .catch((error) => {
+                    setLiked(!liked);
+                    console.log(error);
+                });
+        }
+        else{
+
+            const responseData = LikeMutation.mutateAsync(ImageId);
+
+            responseData
+                .then(() =>{})
+                .catch((error) => {
+                    setLiked(!liked);
+                    console.log(error);
+                });
+        }
+
+    }
 
   return (
     <>
-    <FaRegHeart 
-    className="w-10 h-10 hover:cursor-pointer hover:w-12 hover:h-12" 
-    onClick={changeLike} />
+    {
+        liked ?
+      
+         <FaHeart
+        className="w-10 h-10 hover:cursor-pointer hover:w-12 hover:h-12" 
+    onClick={changeLike}
+         />
+        
+        
+      
+       
+         :
+
+         <FaRegHeart 
+         className="w-10 h-10 hover:cursor-pointer hover:w-12 hover:h-12" 
+         onClick={changeLike} />
+
+    }
+   
     </>
   )
 }

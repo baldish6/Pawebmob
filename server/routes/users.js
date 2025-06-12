@@ -1,7 +1,7 @@
 import express from "express";
 import { 
     getUser,updateUser,deleteUser,subscribe,unsubscribe,
-    likeImage,dislikeImage,saveImage,removeSaveImage
+    likeImage,dislikeImage,saveImage,removeSaveImage,search
  } from "../controllers/user.js";
  import { verifyToken } from "../middleware/verifyToken.js";
 
@@ -10,6 +10,8 @@ const router = express.Router();
 
 // get user
 router.get("/find/:id",getUser)
+
+router.get("/search/:searchParam", search)
 
 // update user
 router.put("/:id",verifyToken,updateUser)

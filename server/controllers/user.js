@@ -12,6 +12,7 @@ export const getUser = async (req,res,next)=>{
       }
 }
 
+
 export const updateUser = async (req,res,next)=>{
     if (req.params.id === req.user.id) {
         try {
@@ -99,7 +100,7 @@ export const unsubscribe = async  (req,res,next)=>{
 
 export const likeImage =   async (req,res,next)=>{
     const id = req.user.id;
-    const imageId = req.params.imageId;
+    const imageId = req.params.ImageId;
     try {
       await Image.findByIdAndUpdate(imageId,{
         $addToSet:{likes:id}
@@ -112,7 +113,7 @@ export const likeImage =   async (req,res,next)=>{
 
 export const dislikeImage =  async  (req,res,next)=>{
     const id = req.user.id;
-    const imageId = req.params.imageId;
+    const imageId = req.params.ImageId;
     try {
       await Image.findByIdAndUpdate(imageId,{
         $pull:{likes:id}
@@ -144,3 +145,15 @@ export const removeSaveImage = async  (req,res,next)=>{
         next(err);
       }
 }
+
+export const search = async (req, res, next) => {
+    const query =req.params.searchParam;
+    try {
+      const users = await User.find({
+        name: { $regex: query, $options: "i" },
+      }).limit(40);
+      res.status(200).json(users);
+    } catch (err) {
+      next(err);
+    }
+  };

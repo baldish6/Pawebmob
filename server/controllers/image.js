@@ -58,7 +58,8 @@ export const deleteImage = async (req,res,next) => {
 }
 
 
-export const sub = async (req, res, next) => {
+export const GetSub = async (req, res, next) => {
+ 
     try {
       const user = await User.findById(req.user.id);
       const subscribedChannels = user.subscribedUsers;
@@ -69,6 +70,7 @@ export const sub = async (req, res, next) => {
         })
       );
 
+      
       res.status(200).json(list.flat().sort((a, b) => b.createdAt - a.createdAt));
     } catch (err) {
       next(err);
@@ -76,7 +78,7 @@ export const sub = async (req, res, next) => {
   };
 
   export const search = async (req, res, next) => {
-    const query = req.query.q;
+    const query = req.params.searchParam;
     try {
       const images = await Image.find({
         title: { $regex: query, $options: "i" },

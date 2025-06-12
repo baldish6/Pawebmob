@@ -9,6 +9,8 @@ import NotFound from './pages/NotFound';
 import Settings from './pages/Settings';
 import Profile from './pages/Profile';
 import NavBar from './components/NavBar';
+import SearchItem from './pages/SearchItem';
+import Subscriptions from './pages/Subscriptions';
 
 
 function App() {
@@ -18,8 +20,10 @@ function App() {
        <Routes>
        <Route  path='/' element={<Login/>}/>
        <Route  path='/login' element={<Login/>}/>
+       <Route  path='/sub' element={<Subscriptions/>}/>
        <Route path='/home' element={<Home/>}/>
        <Route path='/settings' element={<Settings/>}/>
+       <Route path='/search' element={<SearchItem/>}/>
        <Route path='/profile/:id' element={<Profile/>}/>
        <Route path="/image">
               <Route path=":id" element={<Image />} />

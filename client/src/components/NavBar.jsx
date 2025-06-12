@@ -19,11 +19,18 @@ const NavBar = () => {
         <Link to="/settings">Settings</Link>
     </li>
     <li>
+        <Link to="/search">Search</Link>
+    </li>
+    <li>
     <Link to="/image/new">New Post</Link>
+    </li>
+    <li>
+        <Link to="/sub">Subscription</Link>
     </li>
     <li>
     <Link to={"/profile/"+ UserId}>My Post</Link>
     </li>
+    
 </ul>
 <h1>{UserName}</h1>
 <AvatarProfile/>

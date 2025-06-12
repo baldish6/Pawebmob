@@ -23,11 +23,42 @@ export const GetUserPosts = async(user_id)=>{
      return  response.json();
 }
 
+export const GetSubscribedPosts = async()=>{
+  const response = await fetch('http://localhost:4000/api/img/getSub/',{
+     method:'GET',
+     'credentials': 'include',
+     headers: {
+       'Content-Type': 'application/json'
+     },
+  });
+  return  response.json();
+}
+
 export const GetPostById = async(id)=>{
     const response = await fetch('http://localhost:4000/api/img/'+id,{
        method:'GET'
     });
     return  response.json();
+}
+
+export const GetRandom = async()=>{
+  const response = await fetch('http://localhost:4000/api/img/random',{
+     method:'GET'
+  });
+  return  response.json();
+}
+
+export const SearchPost = async(searchParam)=>{
+  if(searchParam==undefined){
+    return {}
+  }
+  else{
+  
+  const response = await fetch('http://localhost:4000/api/img/search/'+searchParam,{
+     method:'GET'
+  });
+  return  response.json();
+}
 }
 
 export const DeletePost = async(id)=>{

@@ -7,6 +7,7 @@ import { DeletePostComments } from "@/services/api/ImageCall";
 import { useParams } from "react-router-dom";
 import { ImageAppWriteDelete } from "@/lib/AppWriteUtil";
 import LikeImg from "./LikeImg";
+import { useUserStore } from "@/store/UserSlice";
 const ImageBody = ({ image, singleImage }) => {
     const DeletePostMutation = useMutation({ mutationFn: DeletePost });
     const DeletePostCommentsMutation = useMutation({
@@ -14,6 +15,9 @@ const ImageBody = ({ image, singleImage }) => {
     });
     const navigate = useNavigate();
     const { id: imgId } = useParams();
+    
+    
+
 
     const deleteImg = () => {
         const response = ImageAppWriteDelete(image.imgUrl);
@@ -47,23 +51,25 @@ const ImageBody = ({ image, singleImage }) => {
         <>
             <h1>{image.title}</h1>
             {singleImage && <Button onClick={deleteImg}>X</Button>}
-            <img src={image.imgUrl}></img>
+            <img src={image.imgUrl}/>
             <h1>{image.desc}</h1>
         </>
     );
 };
 
 const ImageCard = ({ image, singleImage }) => {
+  const {UserId} = useUserStore();
+
     return (
         <div>
             {singleImage ? (
                 <ImageBody singleImage={singleImage} image={image} />
             ) : (
-                <a href={"http://localhost:5173/image/" + image._id}>
+                <a href={"http://localhost:5174/image/" + image._id}>
                     <ImageBody singleImage={singleImage} image={image} />
                 </a>
             )}
-<LikeImg/>
+<LikeImg ImageId={image._id} likeValue={(image.likes).includes(UserId)}/>
         </div>
     );
 };
