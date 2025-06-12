@@ -62,7 +62,7 @@ const ImageCard = ({ image, singleImage }) => {
   const {UserId} = useUserStore();
 
   //const urlPost = "http://localhost:5174/api/image/" + image._id
-  const urlPost = LiveUrl+"/image/" + image._id;
+  const urlPost = LiveUrl+"/img/" + image._id;
 
 
     return (
