@@ -1,7 +1,9 @@
+import { LiveUrl,LocalUrl } from "./BackEndUrl";
+
 export const CreateUser = async(data) =>{
 
       
-    const response = await fetch('http://localhost:4000/api/auth/register', {
+    const response = await fetch(LiveUrl+'/auth/register', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -14,7 +16,7 @@ export const CreateUser = async(data) =>{
 
 export const LoginUser = async(data) =>{
 
-  const response = await fetch("http://localhost:4000/api/auth/login", {
+  const response = await fetch(LiveUrl+"/auth/login", {
       method: 'POST',
       body: JSON.stringify(data),
       'credentials': 'include',
@@ -27,7 +29,7 @@ export const LoginUser = async(data) =>{
 }
 
 export const LogOutUser = async()=>{
-  const response = await fetch("http://localhost:4000/api/auth/logout",{
+  const response = await fetch(LiveUrl+"/auth/logout",{
     method:'GET',
     'credentials': 'include',
     headers: {

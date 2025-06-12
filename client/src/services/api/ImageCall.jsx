@@ -1,6 +1,9 @@
+import { LiveUrl,LocalUrl } from "./BackEndUrl";
+
+
 export const CreatePost = async(data) =>{
       
-    const response = await fetch('http://localhost:4000/api/img/add', {
+    const response = await fetch(LiveUrl+'/img/add', {
         method: 'POST',
         body: JSON.stringify(data),
         'credentials': 'include',
@@ -13,7 +16,7 @@ export const CreatePost = async(data) =>{
 }
 
 export const GetUserPosts = async(user_id)=>{
-     const response = await fetch('http://localhost:4000/api/img/profile/'+user_id,{
+     const response = await fetch(LiveUrl+'/img/profile/'+user_id,{
         method:'GET',
         'credentials': 'include',
         headers: {
@@ -24,7 +27,7 @@ export const GetUserPosts = async(user_id)=>{
 }
 
 export const GetSubscribedPosts = async()=>{
-  const response = await fetch('http://localhost:4000/api/img/getSub/',{
+  const response = await fetch(LiveUrl+'/img/getSub/',{
      method:'GET',
      'credentials': 'include',
      headers: {
@@ -35,14 +38,14 @@ export const GetSubscribedPosts = async()=>{
 }
 
 export const GetPostById = async(id)=>{
-    const response = await fetch('http://localhost:4000/api/img/'+id,{
+    const response = await fetch(LiveUrl+'/img/'+id,{
        method:'GET'
     });
     return  response.json();
 }
 
 export const GetRandom = async()=>{
-  const response = await fetch('http://localhost:4000/api/img/random',{
+  const response = await fetch(LiveUrl+'/img/random',{
      method:'GET'
   });
   return  response.json();
@@ -54,7 +57,7 @@ export const SearchPost = async(searchParam)=>{
   }
   else{
   
-  const response = await fetch('http://localhost:4000/api/img/search/'+searchParam,{
+  const response = await fetch(LiveUrl+'/img/search/'+searchParam,{
      method:'GET'
   });
   return  response.json();
@@ -62,7 +65,7 @@ export const SearchPost = async(searchParam)=>{
 }
 
 export const DeletePost = async(id)=>{
-  const response = await fetch('http://localhost:4000/api/img/'+id,{
+  const response = await fetch(LiveUrl+'/api/img/'+id,{
      method:'DELETE',
      'credentials': 'include',
         headers: {
@@ -73,7 +76,7 @@ export const DeletePost = async(id)=>{
 }
 
 export const DeletePostComments = async(id)=>{
-  const response = await fetch('http://localhost:4000/api/comment/imgdl/'+id,{
+  const response = await fetch(LiveUrl+'/comment/imgdl/'+id,{
      method:'DELETE',
      'credentials': 'include',
         headers: {

@@ -1,5 +1,8 @@
+import { LiveUrl,LocalUrl } from "./BackEndUrl";
+
+
 export const GetUserById = async(id)=>{
-   const response = await fetch('http://localhost:4000/api/user/find/'+id,{
+   const response = await fetch(LiveUrl+'/user/find/'+id,{
       method:'GET'
    });
    return  response.json();
@@ -11,7 +14,7 @@ export const SearchUser = async(searchParam)=>{
       return {}
     }
     else{
-   const response = await fetch('http://localhost:4000/api/user/search/'+searchParam,{
+   const response = await fetch(LiveUrl+'/user/search/'+searchParam,{
       method:'GET'
    });
    return  response.json();
@@ -20,7 +23,7 @@ export const SearchUser = async(searchParam)=>{
 
 
 export const UpdateUser = async({data,UserId})=>{
-   const response = await fetch('http://localhost:4000/api/user/'+UserId, {
+   const response = await fetch(LiveUrl+'/user/'+UserId, {
       method:'PUT',
       body: JSON.stringify(data),
       'credentials': 'include',
@@ -34,7 +37,7 @@ export const UpdateUser = async({data,UserId})=>{
 //DeleteUser
 export const DeleteUser = async(UserId)=>{
    
-   const response = await fetch('http://localhost:4000/api/user/'+UserId, {
+   const response = await fetch(LiveUrl+'/user/'+UserId, {
       method:'DELETE',
       'credentials': 'include',
       headers: {
@@ -45,7 +48,7 @@ export const DeleteUser = async(UserId)=>{
 }
 
 export const LikePost = async(ImageId)=>{
-   const response = await fetch('http://localhost:4000/api/user/like/'+ImageId, {
+   const response = await fetch(LiveUrl+'/user/like/'+ImageId, {
       method:'PUT',
       'credentials': 'include',
       headers: {
@@ -56,7 +59,7 @@ export const LikePost = async(ImageId)=>{
 }
 
 export const DislikePost = async(ImageId)=>{
-   const response = await fetch('http://localhost:4000/api/user/dislike/'+ImageId, {
+   const response = await fetch(LiveUrl+'/user/dislike/'+ImageId, {
       method:'PUT',
       'credentials': 'include',
       headers: {
@@ -69,7 +72,7 @@ export const DislikePost = async(ImageId)=>{
 export const SubscribeUser = async(id)=>{
    console.log("call");
    console.log(id);
-   const response = await fetch('http://localhost:4000/api/user/sub/'+id, {
+   const response = await fetch(LiveUrl+'/user/sub/'+id, {
       method:'PUT',
       'credentials': 'include',
       headers: {
@@ -80,7 +83,7 @@ export const SubscribeUser = async(id)=>{
 }
 
 export const Unsubscribe = async(id)=>{
-   const response = await fetch('http://localhost:4000/api/user/unsub/'+id, {
+   const response = await fetch(LiveUrl+'/user/unsub/'+id, {
       method:'PUT',
       'credentials': 'include',
       headers: {
