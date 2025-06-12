@@ -1,12 +1,12 @@
 
 
 export const getImgUrl = (response) => {
-    const imgUrl = process.env.REACT_APP_ENDPOINT+"/storage/buckets/"
+    const imgUrl = import.meta.env.VITE_ENDPOINT+"/storage/buckets/"
                  +response.bucketId+
                  "/files/"+
                  response.$id+ 
                  "/view?project="+
-                 process.env.REACT_APP_PROJECT_ID+"&mode=admin";
+                 import.meta.env.VITE_PROJECT_ID+"&mode=admin";
                  
                  return imgUrl;
     

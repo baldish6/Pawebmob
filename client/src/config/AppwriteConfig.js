@@ -2,8 +2,8 @@ import { Client } from 'appwrite';
 
 const client = new Client();
 client
-    .setEndpoint(process.env.REACT_APP_ENDPOINT)
-    .setProject(process.env.REACT_APP_PROJECT_ID)
+    .setEndpoint(import.meta.env.VITE_ENDPOINT)
+    .setProject(import.meta.env.VITE_PROJECT_ID)
     
 export default client;
  
