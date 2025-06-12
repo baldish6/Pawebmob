@@ -14,7 +14,7 @@ const app = express();
 
 app.use(cors({
    // origin:"http://localhost:5174",
-   origin:"https://pawebmob-frontend.onrender.com/",
+   origin:"https://pawebmob-frontend.onrender.com",
     credentials:true
 }))
 
