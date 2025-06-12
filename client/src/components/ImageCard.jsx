@@ -9,6 +9,8 @@ import { ImageAppWriteDelete } from "@/lib/AppWriteUtil";
 import LikeImg from "./LikeImg";
 import { useUserStore } from "@/store/UserSlice";
 import {LiveUrl} from "@/services/api/BackEndUrl"
+import { Link } from 'react-router-dom';
+
 const ImageBody = ({ image, singleImage }) => {
     const DeletePostMutation = useMutation({ mutationFn: DeletePost });
     const DeletePostCommentsMutation = useMutation({
@@ -61,18 +63,14 @@ const ImageBody = ({ image, singleImage }) => {
 const ImageCard = ({ image, singleImage }) => {
   const {UserId} = useUserStore();
 
-  //const urlPost = "http://localhost:5174/api/image/" + image._id
-  const urlPost = LiveUrl+"/img/" + image._id;
-
-
     return (
         <div>
             {singleImage ? (
                 <ImageBody singleImage={singleImage} image={image} />
             ) : (
-                <a href={urlPost}>
+                 <Link to={"/image/" + image._id}>
                     <ImageBody singleImage={singleImage} image={image} />
-                </a>
+                </Link>
             )}
 <LikeImg ImageId={image._id} likeValue={(image.likes).includes(UserId)}/>
         </div>
