@@ -1,13 +1,12 @@
 
-import { endpoint, project_id } from '../config/ParamConfig';
 
 export const getImgUrl = (response) => {
-    const imgUrl = endpoint+"/storage/buckets/"
+    const imgUrl = process.env.REACT_APP_ENDPOINT+"/storage/buckets/"
                  +response.bucketId+
                  "/files/"+
                  response.$id+ 
                  "/view?project="+
-                 project_id+"&mode=admin";
+                 process.env.REACT_APP_PROJECT_ID+"&mode=admin";
                  
                  return imgUrl;
     
