@@ -85,6 +85,7 @@ res
 .cookie("access_token", "", {
         httpOnly: true,
         maxAge:1,
+        secure:true,
         samesite:'None',
         path:"/",
         partitioned:true
