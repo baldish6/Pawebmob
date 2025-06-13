@@ -64,7 +64,6 @@ export const login = async (req, res, next) => {
         httpOnly: true,
         secure:true,
         samesite:'None',
-        path:"/",
         partitioned:true,
       })
       .status(200)
@@ -82,7 +81,6 @@ res
         maxAge:1,
         secure:true,
         samesite:'None',
-        path:"/",
         partitioned:true,
       })
       .status(200)

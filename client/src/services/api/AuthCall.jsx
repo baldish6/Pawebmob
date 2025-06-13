@@ -15,7 +15,6 @@ export const CreateUser = async(data) =>{
 }
 
 export const LoginUser = async(data) =>{
-  console.log(LiveUrl);
 
   const response = await fetch(LiveUrl+"/auth/login", {
       method: 'POST',
