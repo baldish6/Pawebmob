@@ -59,8 +59,6 @@ export const login = async (req, res, next) => {
 
     delete req.body.password;
 
-   
-
     res
       .cookie("access_token", token, {
         httpOnly: true,
