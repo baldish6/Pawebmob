@@ -107,16 +107,16 @@ const SearchItem = () => {
                   {users?.map((user) => {
                     return (
                       <>
-                        <a
+                        <Link
                           className="flex gap-4 pt-2 pb-2"
-                          href={"http://localhost:5174/profile/" + user._id}
+                          to={"/profile/" + user._id}
                         >
                           <Avatar className="h-20 w-20">
                             <AvatarImage src={user.avatarUrl} alt="@shadcn" />
                             <AvatarFallback>CN</AvatarFallback>
                           </Avatar>
                           <h1 className="content-center">{user.name}</h1>
-                        </a>
+                        </Link>
                       </>
                     );
                   })}
