@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { createError } from "../error.js";
 import jwt from "jsonwebtoken";
 import { z, ZodError } from "zod" 
+import Cookies from 'js-cookie'
 
 
 const LoginSchema = z.object({
@@ -59,13 +60,16 @@ export const login = async (req, res, next) => {
 
     delete req.body.password;
 
-    res
-      .cookie("access_token", token, {
-        httpOnly: true,
+    Cookies.set('access_token', token, { 
+      domain: '.onrender.com' ,
+      httpOnly: true,
         secure:true,
         samesite:'None',
         partitioned:true,
-      })
+
+    });
+
+    res
       .status(200)
       .json(others);
   } catch (err) {
@@ -75,14 +79,17 @@ export const login = async (req, res, next) => {
 
 export const logout = async(req,res)=>{
 
-res
-      .cookie("access_token","", {
-        httpOnly: true,
-        maxAge:1,
+  Cookies.set('access_token', "", { 
+      domain: '.onrender.com' ,
+       maxAge:1,
+      httpOnly: true,
         secure:true,
         samesite:'None',
         partitioned:true,
-      })
+
+    });
+
+res
       .status(200)
       .json({ success: true });
 }
