@@ -62,6 +62,10 @@ export const login = async (req, res, next) => {
     res
       .cookie("access_token", token, {
         httpOnly: true,
+        SameSite:None,
+         Secure,
+        Path:"/",
+        Partitioned,
       })
       .status(200)
       .json(others);
@@ -75,7 +79,11 @@ export const logout = async(req,res)=>{
 res
       .cookie("access_token","", {
         httpOnly: true,
-        maxAge:1
+        maxAge:1,
+        SameSite:None,
+        Secure,
+        Path:"/",
+        Partitioned,
       })
       .status(200)
       .json({ success: true });
