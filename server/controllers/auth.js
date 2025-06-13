@@ -65,11 +65,11 @@ export const login = async (req, res, next) => {
 
     res.cookie("access_token", token, {
         httpOnly: true,
-        secure:true,
+        /*secure:true,
         domain:"pawebmob-frontend.onrender.com",
         samesite:'Lax',
         path:"/",
-        partitioned:true
+        partitioned:true*/
       })
     .status(200)
       .json(others)
@@ -86,11 +86,12 @@ res
 .cookie("access_token", "", {
         httpOnly: true,
         maxAge:1,
+        /*
         secure:true,
         domain:"pawebmob-frontend.onrender.com",
         samesite:'Lax',
         path:"/",
-        partitioned:true
+        partitioned:true*/
       })
       .status(200)
       .json({ success: true });
