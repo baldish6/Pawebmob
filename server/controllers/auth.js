@@ -60,18 +60,20 @@ export const login = async (req, res, next) => {
 
     delete req.body.password;
 
-    Cookies.set('access_token', token, { 
-      domain: '.onrender.com' ,
-      httpOnly: true,
+    
+   
+
+    res.cookie("access_token", token, {
+        httpOnly: true,
         secure:true,
         samesite:'None',
-        partitioned:true,
-
-    });
-
-    res
-      .status(200)
-      .json(others);
+        path:"/",
+        partitioned:true
+      })
+    .status(200)
+      .json(others)
+    
+      
   } catch (err) {
     throw err;
   }
@@ -79,17 +81,14 @@ export const login = async (req, res, next) => {
 
 export const logout = async(req,res)=>{
 
-  Cookies.set('access_token', "", { 
-      domain: '.onrender.com' ,
-       maxAge:1,
-      httpOnly: true,
-        secure:true,
-        samesite:'None',
-        partitioned:true,
-
-    });
-
 res
+.cookie("access_token", "", {
+        httpOnly: true,
+        maxAge:1,
+        samesite:'None',
+        path:"/",
+        partitioned:true
+      })
       .status(200)
       .json({ success: true });
 }
