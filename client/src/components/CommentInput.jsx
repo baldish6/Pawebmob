@@ -8,30 +8,27 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import SingleComment from "./SingleComment";
-import { GetPostComments } from "@/services/api/CommentCall"
+import { GetPostComments } from "@/services/api/CommentCall";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 
 const CommentInput = () => {
-  const { UserId, UserName } = useUserStore();
-  const queryClient= useQueryClient();
+  const { UserName } = useUserStore();
+  const { id } = useParams();
+  
+  const queryClient = useQueryClient();
 
   const CreateCommentMutation = useMutation({
-     mutationFn: CreateComment,
-     onSuccess: ()=>{
-        queryClient.invalidateQueries(["comments"])
-     }
-     });
-
-     
-
-
-  const { id } = useParams();
-  const {data:comments,isLoading,} = useQuery({
-    queryFn:()=> GetPostComments(id),
-    queryKey:["comments",{id}],
-  })
-
+    mutationFn: CreateComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["comments"]);
+    },
+  });
+  
+  const { data: comments, isLoading } = useQuery({
+    queryFn: () => GetPostComments(id),
+    queryKey: ["comments", { id }],
+  });
 
   const {
     register,
@@ -47,7 +44,6 @@ const CommentInput = () => {
   });
 
   const handleComment = async (data) => {
-
     var datapost = {};
     datapost.desc = data.desc;
     datapost.imageId = id;
@@ -67,16 +63,17 @@ const CommentInput = () => {
       });
   };
 
-  if(isLoading){
-    return <div>Loading comments ... </div>
+  if (isLoading) {
+    return <div>Loading comments ... </div>;
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-4  pl-4 pr-4 pb-4">
       <h1>{UserName}</h1>
-      <form onSubmit={handleSubmit(handleComment)}>
-        <Input {...register("desc")} placeholder="comment..."></Input>
-
+      <form className="flex flex-col gap-2 " onSubmit={handleSubmit(handleComment)}>
+        <div>
+           <Input {...register("desc")} placeholder="comment..."></Input>
+        </div>
         {isSubmitting ? (
           <Loader2>Loading....</Loader2>
         ) : (
@@ -88,9 +85,9 @@ const CommentInput = () => {
         )}
       </form>
       <div>
-        {comments?.map((comment)=>{
-            return <SingleComment key={comment._id} comment={comment}/>
-            })}
+        {comments?.map((comment) => {
+          return <SingleComment key={comment._id} comment={comment} />;
+        })}
       </div>
     </div>
   );

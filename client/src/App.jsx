@@ -1,5 +1,4 @@
 import './App.css'
-import { Button } from "@/components/ui/button"
 import { Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -11,7 +10,6 @@ import Profile from './pages/Profile';
 import NavBar from './components/NavBar';
 import SearchItem from './pages/SearchItem';
 import Subscriptions from './pages/Subscriptions';
-
 
 function App() {
   return (

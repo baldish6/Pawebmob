@@ -1,35 +1,50 @@
-import ImageCard from '@/components/ImageCard'
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import { GetPostById } from '@/services/api/ImageCall'
-import { useUserStore } from '@/store/UserSlice'
-import CommentInput from '@/components/CommentInput'
+import ImageCard from "@/components/ImageCard";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { GetPostById } from "@/services/api/ImageCall";
+import { useUserStore } from "@/store/UserSlice";
+import CommentInput from "@/components/CommentInput";
 
 const Image = () => {
-
   const { id } = useParams();
-  const {UserId} = useUserStore();
+  const { UserId } = useUserStore();
 
-    const {data,isLoading,isError,error}= useQuery({
-        queryFn:()=>GetPostById(id),
-        queryKey:["getUserInfo",{id}],
-    })
+  const { data, isLoading, isError, error } = useQuery({
+    queryFn: () => GetPostById(id),
+    queryKey: ["getUserInfo", { id }],
+  });
 
-    if (isLoading){
-        return (<div><h1>Loading...</h1></div>)
-    }
-    if(isError){
-        return(<div><h1>{JSON.stringify(error)}</h1></div>)
-    }
-
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
+  if (isError) {
+    return (
+      <div>
+        <h1>{JSON.stringify(error)}</h1>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <ImageCard key={data._id} singleImage={true}  image={data}></ImageCard>
-      {UserId!="" && <CommentInput/> }
-    </div>
-  )
-}
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ImageCard key={data._id} singleImage={true} image={data}></ImageCard>
+      </div>
+      {UserId != "" && <CommentInput />}
+    </>
+  );
+};
 
-export default Image
+export default Image;

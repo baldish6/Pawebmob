@@ -15,7 +15,6 @@ export const CreateUser = async(data) =>{
 }
 
 export const LoginUser = async(data) =>{
- // console.log(data);
   console.log(LiveUrl);
 
   const response = await fetch(LiveUrl+"/auth/login", {
@@ -26,7 +25,6 @@ export const LoginUser = async(data) =>{
         'Content-Type': 'application/json'
       },
     });
-  // console.log(response.json());
   return response.json();
 }
 

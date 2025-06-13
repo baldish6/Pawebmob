@@ -1,38 +1,58 @@
-import { GetUserPosts } from '@/services/api/ImageCall'
-import { useQuery } from '@tanstack/react-query'
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import ImageCard from '@/components/ImageCard'
-import SubButton from '@/components/SubButton'
+import { GetUserPosts } from "@/services/api/ImageCall";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import { useParams } from "react-router-dom";
+import ImageCard from "@/components/ImageCard";
+import SubButton from "@/components/SubButton";
 
 const Profile = () => {
+  const { id } = useParams();
+  const {
+    data: images,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryFn: () => GetUserPosts(id),
+    queryKey: ["getUserInfo", { id }],
+  });
 
-
-    const { id } = useParams();
-    const {data:images,isLoading,isError,error}= useQuery({
-        queryFn:()=>GetUserPosts(id),
-        queryKey:["getUserInfo",{id}],
-    })
-
-    if (isLoading){
-        return (<div><h1>Loading...</h1></div>)
-    }
-    if(isError){
-        return(<div><h1>{JSON.stringify(error)}</h1></div>)
-    }
-
-    
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
+  if (isError) {
+    return (
+      <div>
+        <h1>{JSON.stringify(error)}</h1>
+      </div>
+    );
+  }
 
   return (
-    <div>
-        <SubButton/>
-        
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "auto",
+        }}
+      >
         <h1>Posts</h1>
-        {images?.map((image)=>{
-           return (<ImageCard key={image._id} singleImage={false} image={image} />)
+        <SubButton />
+        {images?.map((image) => {
+          return (
+            <ImageCard key={image._id} singleImage={false} image={image} />
+          );
         })}
-    </div>
-  )
-}
+      </div>
+    </>
+  );
+};
 
-export default Profile
+export default Profile;
