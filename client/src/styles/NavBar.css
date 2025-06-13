@@ -1,0 +1,139 @@
+div .navDiv{
+    background: var(--mainColor);
+    color:var(--textColor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:10px;
+    position: sticky;
+    padding: 0 2rem;
+    top: 0;
+}
+
+div .nav-ul{
+    display: flex;
+    gap: 10px;
+   font-size: large;
+}
+div .nav-ul a{
+    display:flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    border-radius: 0.5rem;
+}
+
+div .home-btn:not(.active):hover{
+    background: rgb(237, 255, 44);
+    color: var(--mainColor);
+    cursor: pointer;
+    
+}
+
+div .nav-ul a:not(.active):hover{
+    background: rgb(237, 255, 44);
+    color: var(--mainColor);
+    cursor: pointer;
+}
+
+.nav-close-btn{
+    display: none;
+}
+
+.nav-open-btn{
+    display: none;
+}
+
+.active{
+    background: white;
+    color: var(--mainColor);
+}
+
+.mobile-menu{
+    display: none;
+    position: absolute;
+    top:0.75rem;
+    right:0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+}
+
+
+.mobile-menu span{
+    height: 0.4rem;
+    width: 100%;
+    border-radius:0.2rem;
+}
+
+@media (max-width:770px){
+    .navDiv{
+        display: flex;
+         height: 100vh;
+        width: 100%;
+        
+    }
+
+    .navDiv div.avt{
+        display: none;
+    }
+
+    .closeDivMob{
+       background: var(--mainColor);
+    color:var(--textColor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:10px;
+    position: sticky;
+    padding: 0 2rem;
+    top: 0;
+    }
+
+     
+
+
+    .mobile-menu{
+        display: flex;
+    }
+
+    .close-menu{
+        display: none;
+    }
+
+    .nav-close-btn{
+    display: inline;
+    position: absolute;
+    top:2rem;
+    right:2rem;
+
+}
+
+.nav-open-btn{
+    display: inline;
+}
+
+    .nav-ul{
+        transform: none;
+    }
+
+    .navDiv{
+        flex-direction: column;
+        align-items: start;
+    }
+    div .nav-ul{
+        display: one;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+    .nav-ul li {
+        display: inline ;
+        width: 100%;
+    }
+    div .nav-ul a{
+       text-align: center;
+    }
+}

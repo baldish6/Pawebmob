@@ -47,7 +47,7 @@ const Login = () => {
         const responseData = LoginUserMutation.mutateAsync(data);
         responseData
             .then((res) => {
-                //console.log(res)
+                console.log("loginning");
                 setUserId(res._id);
                 setUserName(res.name);
                 setUserAvatar(res.avatarUrl);
