@@ -66,7 +66,8 @@ export const login = async (req, res, next) => {
     res.cookie("access_token", token, {
         httpOnly: true,
         secure:true,
-        samesite:'None',
+        domain:"pawebmob-frontend.onrender.com",
+        samesite:'Lax',
         path:"/",
         partitioned:true
       })
@@ -86,7 +87,8 @@ res
         httpOnly: true,
         maxAge:1,
         secure:true,
-        samesite:'None',
+        domain:"pawebmob-frontend.onrender.com",
+        samesite:'Lax',
         path:"/",
         partitioned:true
       })
