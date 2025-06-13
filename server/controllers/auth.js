@@ -62,10 +62,10 @@ export const login = async (req, res, next) => {
     res
       .cookie("access_token", token, {
         httpOnly: true,
-        SameSite:None,
-         Secure,
-        Path:"/",
-        Partitioned,
+        secure:true,
+        samesite:'None',
+        path:"/",
+        partitioned:true,
       })
       .status(200)
       .json(others);
@@ -80,10 +80,10 @@ res
       .cookie("access_token","", {
         httpOnly: true,
         maxAge:1,
-        SameSite:None,
-        Secure,
-        Path:"/",
-        Partitioned,
+        secure:true,
+        samesite:'None',
+        path:"/",
+        partitioned:true,
       })
       .status(200)
       .json({ success: true });
