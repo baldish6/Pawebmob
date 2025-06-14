@@ -17,7 +17,8 @@ app.use(cors({
    origin:"https://pawebmob-frontend.onrender.com",
     credentials:true
 }))
-
+ app.set("trust proxy", true); 
+ 
 app.use(express.json());
 app.use(express.urlencoded({extended:true},))
 app.use(cookieParser());
