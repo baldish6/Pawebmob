@@ -64,7 +64,7 @@ export const login = async (req, res, next) => {
    
 
     res.cookie("access_token", token, {
-        httpOnly: true,
+        httpOnly: false,
         /*secure:true,
         domain:"pawebmob-frontend.onrender.com",
         samesite:'Lax',
@@ -84,7 +84,7 @@ export const logout = async(req,res)=>{
 
 res
 .cookie("access_token", "", {
-        httpOnly: true,
+        httpOnly: false,
         maxAge:1,
         /*
         secure:true,
