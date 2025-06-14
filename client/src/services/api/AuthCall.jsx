@@ -1,4 +1,4 @@
-import { LiveUrl,LocalUrl } from "./BackEndUrl";
+import { LiveUrl } from "./BackEndUrl";
 
 export const CreateUser = async(data) =>{
 

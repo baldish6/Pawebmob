@@ -4,7 +4,8 @@ import bcrypt from "bcryptjs";
 import { createError } from "../error.js";
 import jwt from "jsonwebtoken";
 import { z, ZodError } from "zod" 
-import Cookies from 'js-cookie'
+//import Cookies from 'js-cookie'
+import Cookies from 'universal-cookie';
 
 
 const LoginSchema = z.object({
@@ -65,6 +66,7 @@ export const login = async (req, res, next) => {
 
     //res.cookie("access_token", token, {httpOnly: true});
 
+   // const cookies = new Cookies(res.headers.cookie, { path: '/' });
     res.status(200)
       .json(others)
     
