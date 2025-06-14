@@ -14,8 +14,8 @@ const app = express();
 
 app.use(cors({
     //origin:"http://localhost:5173",
-   //origin:"https://pawebmob-frontend.onrender.com",
-   origin:"https://baldish6.github.io/Pawebmob/tree/master/",
+   origin:"https://pawebmob-frontend.onrender.com",
+   //origin:"https://baldish6.github.io/Pawebmob/tree/master/",
     credentials:true
 }))
 
