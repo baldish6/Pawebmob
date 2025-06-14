@@ -26,8 +26,6 @@ router.delete("/:id",verifyToken,deleteImage)
 // get images by search function
 router.get("/search/:searchParam", search)
 
-
-
 // get all posted images
 router.get("/profile/:id", profilePost)
  

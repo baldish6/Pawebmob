@@ -69,7 +69,7 @@ const Login = () => {
 
   return (
     <div className="flex">
-      <Card className="w-[350px] absolute m-auto left-0 right-0 top-1/5">
+      <Card className="w-[350px] absolute m-auto left-0 right-0 top-1/7">
         <CardHeader>
           <CardTitle>{!isLogin ? "Register" : "Login"}</CardTitle>
         </CardHeader>
@@ -77,7 +77,7 @@ const Login = () => {
           {!isLogin ? (
             <UserInfo setIsLogin={setIsLogin} handleLogin={handleLogin} />
           ) : (
-            <form onSubmit={handleSubmit2(handleLogin)}>
+            <form className="flex flex-col gap-3" onSubmit={handleSubmit2(handleLogin)}>
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="name">Email</Label>

@@ -70,8 +70,6 @@ export const DislikePost = async(ImageId)=>{
 }
 
 export const SubscribeUser = async(id)=>{
-   console.log("call");
-   console.log(id);
    const response = await fetch(LiveUrl+'/user/sub/'+id, {
       method:'PUT',
       'credentials': 'include',

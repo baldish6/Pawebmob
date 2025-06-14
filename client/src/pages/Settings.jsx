@@ -22,11 +22,11 @@ const Settings = () => {
   } = useUserStore();
 
   const LogoutUser = () => {
-    logout();
     const responseData = LogOutUserMutation.mutateAsync();
     responseData
       .then(() => {
         navigate("/login");
+        logout();
       })
       .catch((error) => {
         console.log(error);

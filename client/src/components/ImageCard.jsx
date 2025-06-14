@@ -82,14 +82,13 @@ const ImageBody = ({ image, singleImage }) => {
         <CardHeader>
 
           {user && 
-          <Link to={"/profile/" + user._id}  className="flex">
-
+          <div className="flex gap-2">
             <Avatar>
         <AvatarImage src={user.avatarUrl} alt="@shadcn" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <h1>{user.name}</h1>
-          </Link>
+          </div>
           
           }
 

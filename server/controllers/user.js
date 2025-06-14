@@ -124,27 +124,6 @@ export const dislikeImage =  async  (req,res,next)=>{
   }
 }
 
-export const saveImage = async  (req,res,next)=>{
-    try {
-        await User.findByIdAndUpdate(req.user.id, {
-          $addToSet: { savedImages: req.params.imageId },
-        });
-        res.status(200).json("The image has been saved.")
-      } catch (err) {
-        next(err);
-      }
-}
- 
-export const removeSaveImage = async  (req,res,next)=>{
-    try {
-          await User.findByIdAndUpdate(req.user.id, {
-            $pull: { savedImages: req.params.imageId },
-          });
-          res.status(200).json("The image has been removed from saved.")
-      } catch (err) {
-        next(err);
-      }
-}
 
 export const search = async (req, res, next) => {
     const query =req.params.searchParam;

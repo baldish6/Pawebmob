@@ -31,10 +31,5 @@ router.put("/like/:ImageId",verifyToken,likeImage)
 // dislike image
 router.put("/dislike/:ImageId",verifyToken,dislikeImage)
 
-// save image
-router.put("/save/:id",verifyToken,saveImage)
-
-// remove from saved image
-router.put("/unsave/:id",verifyToken,removeSaveImage)
 
 export default router;

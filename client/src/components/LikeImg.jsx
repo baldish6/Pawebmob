@@ -37,7 +37,7 @@ const LikeImg = ({ ImageId, likeValue }) => {
   };
 
   return (
-    <>
+    <div className="z-10">
       {liked ? (
         <FaHeart
           className="w-10 h-10 hover:cursor-pointer hover:w-12 hover:h-12"
@@ -49,7 +49,7 @@ const LikeImg = ({ ImageId, likeValue }) => {
           onClick={changeLike}
         />
       )}
-    </>
+    </div>
   );
 };
 

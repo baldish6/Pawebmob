@@ -8,6 +8,7 @@ div .navDiv{
     position: sticky;
     padding: 0 2rem;
     top: 0;
+    z-index: 10;
 }
 
 div .nav-ul{
@@ -72,10 +73,11 @@ div .nav-ul a:not(.active):hover{
         display: flex;
          height: 100%;
         width: 100%;
+        z-index: 10;
         
     }
 
-    .navDiv div.avt{
+    .navDiv .avt{
         display: none;
     }
 
@@ -89,6 +91,7 @@ div .nav-ul a:not(.active):hover{
     position: sticky;
     padding: 0 2rem;
     top: 0;
+    z-index: 10;
     }
 
      

@@ -102,7 +102,6 @@ const NewImage = () => {
               <span className="error text-red-600">{errors.image.message}</span>
             )}
             {
-              // watchImg!=undefined && console.log(watchImg[0])
               watchImg != undefined && watchImg.length > 0 && (
                 <img src={URL.createObjectURL(watchImg[0])} alt="alt" />
               )

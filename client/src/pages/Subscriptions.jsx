@@ -29,22 +29,22 @@ const Subscriptions = () => {
     );
   }
 
+  if(!isLoading&&images.length==0){
+    return<h1>You haven't subscribed to any users</h1>
+  }
+
   return (
-    <div>
-      <h1>Posts</h1>
-      {images?.map((image) => {
-        return (
-          <div
-            style={{
+    <div style={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
               //height: '100vh'
-            }}
-          >
-            <ImageCard key={image._id} singleImage={false} image={image} />
-          </div>
+            }}>
+      <h1>Posts</h1>
+      {images?.map((image) => {
+        return (
+           <ImageCard key={image._id} singleImage={false} image={image} />
         );
       })}
     </div>

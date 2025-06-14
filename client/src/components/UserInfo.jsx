@@ -28,6 +28,7 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
   const CreateUserMutation = useMutation({ mutationFn: CreateUser });
   const UpdateUserMutation = useMutation({ mutationFn: UpdateUser });
   const [editProfile, setEditProfile] = useState(false);
+  const [isLoading,setIsLoading]=useState(false);
 
   const {
     register,
@@ -53,6 +54,7 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
 
   const handleSuccess = (data) => {
     reset;
+    setIsLoading(true);
     handleLogin(data);
   };
 
@@ -81,14 +83,18 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
   };
 
   const onSubmit = async (data) => {
+
+    setIsLoading(true);
+
+
     if (UserId != "") {
       const response2 = ImageAppWriteDelete(UserAvatar);
       response2.then(() => {
-        console.log("img deleted");
       }),
         function (error) {
           console.log(error); // Failure
         };
+
     }
 
     const response = ImageAppWriteUpload(data.image[0]);
@@ -118,6 +124,7 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
             handleSuccess(data);
           })
           .catch((errors) => {
+                setIsLoading(false);
             handleServerError(errors);
           });
       }
@@ -125,9 +132,20 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
       //console.log(data);
     }),
       function (error) {
+        setIsLoading(false);
         console.log(error); // Failure
       };
+
+
   };
+
+  if(isLoading){
+    return<>
+    {(UserId == "")?<h1>Registring users ... please be patient</h1>:
+    <h1>Updating users ...</h1>
+    }
+    </>
+  }
 
   if (setIsLogin == undefined && editProfile == false) {
     return (
@@ -138,7 +156,7 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
             <CardTitle>{UserName}</CardTitle>
           </CardHeader>
           <CardContent className="flex justify-center content-center gap-3">
-            <Avatar className="w-16 h-16 ">
+            <Avatar className="w-16 h-16  ">
               <AvatarImage src={UserAvatar} alt="@shadcn" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
@@ -185,7 +203,7 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
             )}
             {(watchImg != undefined && watchImg.length > 0 && (
               <div className="flex">
-                <Avatar className="w-16 h-16">
+                <Avatar className="w-16 h-16)">
                   <AvatarImage
                     src={URL.createObjectURL(watchImg[0])}
                     alt="alt"
@@ -210,7 +228,7 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
                       alt="@shadcn"
                     />
                   ) : (
-                    <AvatarImage src={UserAvatar} alt="@shadcn" />
+                    <AvatarImage   src={UserAvatar} alt="@shadcn" />
                   )}
 
                   <AvatarFallback>CN</AvatarFallback>

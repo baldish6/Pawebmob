@@ -40,8 +40,10 @@ const SearchItem = () => {
     setSearchParam(inputv);
   };
 
+  
+
   return (
-    <div className="flex w-full flex-col gap-6 pl-5">
+    <div className="flex w-full flex-col gap-6">
       <>
         <h1>search res</h1>
         <Tabs
@@ -54,7 +56,7 @@ const SearchItem = () => {
             <TabsTrigger value="image">Image</TabsTrigger>
             <TabsTrigger value="user">User</TabsTrigger>
           </TabsList>
-          <div className="flex w-full max-w-sm align-middle justify-center pl-4">
+          <div className="flex w-full max-w-sm align-middle justify-center ">
             <Input
               type={"search"}
               onChange={(e) => {
@@ -66,6 +68,7 @@ const SearchItem = () => {
               Search
             </Button>
           </div>
+          
           {searchParam == "" ? (
             <div>Start searching</div>
           ) : (
@@ -81,14 +84,19 @@ const SearchItem = () => {
                     //height: '100vh'
                   }}
                 >
-                  {images?.map((image) => {
+                  {
+                    (!isLoading&&images!=undefined&&images.length==0&&searchParam!="")?
+                    <h1>No images found</h1>
+                    :
+                    
+                  images?.map((image) => {
                     return (
-                      <>
-                        <Link className="pt-2 pb-2" to={"/image/" + image._id}>
+                      
+                        <Link key={image._id} className="pt-2 pb-2" to={"/image/" + image._id}>
                           <h1>{image.title}</h1>
                           <img src={image.imgUrl} />
                         </Link>
-                      </>
+                      
                     );
                   })}
                 </div>
@@ -104,10 +112,17 @@ const SearchItem = () => {
                     //height: '100vh'
                   }}
                 >
-                  {users?.map((user) => {
+                  {
+                    (!isLoading2&&users!=undefined&&users.length==0&&searchParam!="")
+                    ?
+                    <h1>No Users found</h1>
+                    :
+                      
+                  users?.map((user) => {
                     return (
-                      <>
+                      
                         <Link
+                        key={user._id}
                           className="flex gap-4 pt-2 pb-2"
                           to={"/profile/" + user._id}
                         >
@@ -117,7 +132,7 @@ const SearchItem = () => {
                           </Avatar>
                           <h1 className="content-center">{user.name}</h1>
                         </Link>
-                      </>
+                      
                     );
                   })}
                 </div>

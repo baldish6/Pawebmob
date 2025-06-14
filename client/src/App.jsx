@@ -10,7 +10,6 @@ import Profile from './pages/Profile';
 import NavBar from './components/NavBar';
 import SearchItem from './pages/SearchItem';
 import Subscriptions from './pages/Subscriptions';
-import LoginP from './pages/LoginP';
 
 
 function App() {
