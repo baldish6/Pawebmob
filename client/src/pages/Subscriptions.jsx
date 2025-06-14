@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { GetSubscribedPosts } from "@/services/api/ImageCall";
 import ImageCard from "@/components/ImageCard";
+import "../styles/MiddlePost.css";
 
 const Subscriptions = () => {
   const {
@@ -34,13 +35,7 @@ const Subscriptions = () => {
   }
 
   return (
-    <div style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              //height: '100vh'
-            }}>
+    <div className="middle-post">
       <h1>Posts</h1>
       {images?.map((image) => {
         return (

@@ -7,6 +7,8 @@ import { SearchUser } from "@/services/api/UserCall";
 import { useQuery } from "@tanstack/react-query";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
+import "../styles/MiddlePost.css";
+
 const SearchItem = () => {
   const [inputv, setInputv] = useState("");
   const [searchParam, setSearchParam] = useState("");
@@ -75,15 +77,7 @@ const SearchItem = () => {
             <>
               <TabsContent value="image">
                 <h1>Images : </h1>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    //height: '100vh'
-                  }}
-                >
+                <div className="middle-post">
                   {
                     (!isLoading&&images!=undefined&&images.length==0&&searchParam!="")?
                     <h1>No images found</h1>
@@ -103,15 +97,7 @@ const SearchItem = () => {
               </TabsContent>
               <TabsContent value="user">
                 <h1>Users : </h1>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    //height: '100vh'
-                  }}
-                >
+                <div className="middle-post">
                   {
                     (!isLoading2&&users!=undefined&&users.length==0&&searchParam!="")
                     ?

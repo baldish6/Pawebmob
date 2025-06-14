@@ -6,7 +6,7 @@ import { LogOutUser } from "@/services/api/AuthCall";
 import { useNavigate } from "react-router-dom";
 import UserInfo from "../components/UserInfo";
 import DelUs from "@/components/DelUs";
-import { DeleteUser } from "@/services/api/UserCall";
+import "../styles/MiddlePost.css";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -42,17 +42,7 @@ const Settings = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        margin: "auto",
-        paddingTop: "10lvh",
-        //height: '100vh'
-      }}
-    >
+    <div className="middle-post">
       Settings:
       <UserInfo
         className="pt-4"

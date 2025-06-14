@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { GetPostById } from "@/services/api/ImageCall";
 import { useUserStore } from "@/store/UserSlice";
 import CommentInput from "@/components/CommentInput";
+import "../styles/MiddlePost.css";
+
 
 const Image = () => {
   const { id } = useParams();
@@ -32,14 +34,7 @@ const Image = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <div className="middle-post">
         <ImageCard key={data._id} singleImage={true} image={data}></ImageCard>
       </div>
       {UserId != "" && <CommentInput />}

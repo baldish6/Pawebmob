@@ -1,7 +1,7 @@
 import express from "express";
 import { 
     getUser,updateUser,deleteUser,subscribe,unsubscribe,
-    likeImage,dislikeImage,saveImage,removeSaveImage,search
+    likeImage,dislikeImage,search
  } from "../controllers/user.js";
  import { verifyToken } from "../middleware/verifyToken.js";
 

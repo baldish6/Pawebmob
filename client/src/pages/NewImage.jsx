@@ -18,6 +18,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import "../styles/MiddlePost.css";
+
 
 const NewImage = () => {
   const CreatePostMutation = useMutation({ mutationFn: CreatePost });
@@ -72,16 +74,7 @@ const NewImage = () => {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        margin: "auto",
-        paddingTop: "5lvh",
-      }}
-    >
+    <div className="middle-post pt-9" >
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Upload an Image</CardTitle>

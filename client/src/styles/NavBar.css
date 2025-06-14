@@ -68,6 +68,7 @@ div .nav-ul a:not(.active):hover{
     border-radius:0.2rem;
 }
 
+
 @media (max-width:770px){
     .navDiv{
         display: flex;

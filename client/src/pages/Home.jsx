@@ -2,6 +2,8 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { GetRandom } from "@/services/api/ImageCall";
 import ImageCard from "@/components/ImageCard";
+import "../styles/MiddlePost.css";
+
 
 const Home = () => {
   const {
@@ -32,15 +34,7 @@ const Home = () => {
   return (
     <div>
       <h1>Posts</h1>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          //height: '100vh'
-        }}
-      >
+      <div className="middle-post">
         {images?.map((image) => {
           return (
             <ImageCard key={image._id} singleImage={false} image={image} />

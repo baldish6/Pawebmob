@@ -128,8 +128,6 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
             handleServerError(errors);
           });
       }
-
-      //console.log(data);
     }),
       function (error) {
         setIsLoading(false);
@@ -149,7 +147,6 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
 
   if (setIsLogin == undefined && editProfile == false) {
     return (
-      //UserName, UserAvatar, UserEmail, UserId
       <>
         <Card className="w-full max-w-sm">
           <CardHeader>
