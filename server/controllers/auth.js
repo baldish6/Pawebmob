@@ -60,18 +60,9 @@ export const login = async (req, res, next) => {
 
     delete req.body.password;
 
-    
-   
+    res.cookie("access_token", token, {httpOnly: true});
 
-    res.cookie("access_token", token, {
-        httpOnly: false,
-        /*secure:true,
-        domain:"pawebmob-frontend.onrender.com",
-        samesite:'Lax',
-        path:"/",
-        partitioned:true*/
-      })
-    .status(200)
+    res.status(200)
       .json(others)
     
       
@@ -82,17 +73,8 @@ export const login = async (req, res, next) => {
 
 export const logout = async(req,res)=>{
 
-res
-.cookie("access_token", "", {
-        httpOnly: false,
-        maxAge:1,
-        /*
-        secure:true,
-        domain:"pawebmob-frontend.onrender.com",
-        samesite:'Lax',
-        path:"/",
-        partitioned:true*/
-      })
-      .status(200)
+res.cookie("access_token", "", {httpOnly: false,maxAge:1 });
+
+     res.status(200)
       .json({ success: true });
 }
