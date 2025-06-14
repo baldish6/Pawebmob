@@ -60,7 +60,9 @@ export const login = async (req, res, next) => {
 
     delete req.body.password;
 
-    res.cookie("access_token", token, {httpOnly: true});
+    res.headers.add('Set-Cookie', 'access_token='+token+'; HttpOnly; SameSite=None; Secure; Path=/; Partitioned;')
+
+    //res.cookie("access_token", token, {httpOnly: true});
 
     res.status(200)
       .json(others)
@@ -73,7 +75,9 @@ export const login = async (req, res, next) => {
 
 export const logout = async(req,res)=>{
 
-res.cookie("access_token", "", {httpOnly: false,maxAge:1 });
+//res.cookie("access_token", "", {httpOnly: false,maxAge:1 });
+
+res.headers.add('Set-Cookie', 'refreshToken=; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; HttpOnly; SameSite=None; Secure; Path=/; Partitioned;')
 
      res.status(200)
       .json({ success: true });
