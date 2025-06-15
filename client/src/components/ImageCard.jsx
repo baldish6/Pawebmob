@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
+
 const ImageBody = ({ image, singleImage }) => {
   
   const navigate = useNavigate();
@@ -76,18 +77,27 @@ const ImageBody = ({ image, singleImage }) => {
       };
   };
 
+  const GoProfile = (e) =>{
+    const current_url = window.location.href;
+     e.stopPropagation();
+     if(!current_url.includes("profile"))
+     {
+        navigate("/profile/"+userSearch);
+     }
+  }
+
   return (
-    <>
-      <Card className="max-w-xl">
+    
+      <>
         <CardHeader>
 
           {user && 
           <div className="flex gap-2">
-            <Avatar>
+            <Avatar className="hover:cursor-pointer hover:scale-125"  onClick={GoProfile}>
         <AvatarImage src={user.avatarUrl} alt="@shadcn" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
-      <h1>{user.name}</h1>
+      <h1 className="hover:cursor-pointer hover:scale-125" onClick={GoProfile}>{user.name}</h1>
           </div>
           
           }
@@ -131,20 +141,40 @@ const ImageBody = ({ image, singleImage }) => {
             />
           </div>
         </CardFooter>
-      </Card>
-    </>
+        </>
+      
+   
   );
 };
 
+
+
 const ImageCard = ({ image, singleImage }) => {
+
+    const navigate = useNavigate();
+
+  const GoImg = (e) =>{
+    const current_url = window.location.href;
+
+     e.stopPropagation();
+     if(!current_url.includes("image"))
+     {
+        navigate("/image/"+image._id);
+     }
+
+  }
+
   return (
     <div className="mb-4">
       {singleImage ? (
-        <ImageBody singleImage={singleImage} image={image} />
+         <Card className="max-w-xl">
+<ImageBody singleImage={singleImage} image={image} />
+         </Card>
+        
       ) : (
-        <Link to={"/image/" + image._id}>
+        <Card onClick={GoImg} className="max-w-xl hover:cursor-pointer">
           <ImageBody singleImage={singleImage} image={image} />
-        </Link>
+        </Card>
       )}
     </div>
   );

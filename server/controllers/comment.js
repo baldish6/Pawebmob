@@ -1,8 +1,28 @@
 import { createError } from "../error.js";
 import Comment from "../models/Comment.js";
 import Image from "../models/Image.js";
+import {  z } from "zod" 
+
+const CommentSchema = z.object({
+    desc:z.string()
+    .min(1,"Comment is required")
+    .max(10000,"Max 10000 characters"), 
+   
+});
 
 export const addComment = async (req, res, next) => {
+
+  const result = CommentSchema.safeParse(req.body);
+    let zodErrors = {};
+    if(!result.success){
+        result.error.issues.forEach((issue)=>{
+            zodErrors = {...zodErrors,[issue.path[0]]:issue.message};
+        })}
+     
+    if(Object.keys(zodErrors).length>0){
+        res.status(400).json({errors:zodErrors});
+    } 
+    else{
   const newComment = new Comment({ ...req.body, userId: req.user.id });
   try {
     const savedComment = await newComment.save();
@@ -10,6 +30,7 @@ export const addComment = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+}
 };
 
 export const deleteComment = async (req, res, next) => {

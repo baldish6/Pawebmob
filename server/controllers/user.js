@@ -2,6 +2,8 @@ import { createError } from "../error.js";
 import User from "../models/User.js";
 import Image from "../models/Image.js";
 import Comment from "../models/Comment.js";
+import bcrypt from "bcryptjs";
+
 
 export const getUser = async (req,res,next)=>{
     try {
@@ -14,12 +16,17 @@ export const getUser = async (req,res,next)=>{
 
 
 export const updateUser = async (req,res,next)=>{
+      const salt = bcrypt.genSaltSync(10);
+  
     if (req.params.id === req.user.id) {
         try {
+           const hash = bcrypt.hashSync(req.body.password, salt);
+           req.body.password=hash;
           const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
             {
               $set: req.body,
+
             },
             { new: true }
           );

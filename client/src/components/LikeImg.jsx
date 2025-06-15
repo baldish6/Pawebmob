@@ -12,9 +12,9 @@ const LikeImg = ({ ImageId, likeValue }) => {
     mutationFn: DislikePost,
   });
 
-  const changeLike = () => {
+  const changeLike = (e) => {
     setLiked(!liked);
-
+     e.stopPropagation();
     if (liked) {
       const responseData = DislikeMutation.mutateAsync(ImageId);
 

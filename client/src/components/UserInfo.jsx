@@ -153,7 +153,7 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
             <CardTitle>{UserName}</CardTitle>
           </CardHeader>
           <CardContent className="flex justify-center content-center gap-3">
-            <Avatar className="w-16 h-16  ">
+            <Avatar className="w-16 h-16 ">
               <AvatarImage src={UserAvatar} alt="@shadcn" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
@@ -200,7 +200,7 @@ const UserInfo = ({ setIsLogin, handleLogin }) => {
             )}
             {(watchImg != undefined && watchImg.length > 0 && (
               <div className="flex">
-                <Avatar className="w-16 h-16)">
+                <Avatar className="w-16 h-16">
                   <AvatarImage
                     src={URL.createObjectURL(watchImg[0])}
                     alt="alt"
