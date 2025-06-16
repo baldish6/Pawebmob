@@ -65,7 +65,7 @@ export const SearchPost = async(searchParam)=>{
 }
 
 export const DeletePost = async(id)=>{
-  const response = await fetch(LiveUrl+'/api/img/'+id,{
+  const response = await fetch(LiveUrl+'/img/'+id,{
      method:'DELETE',
      'credentials': 'include',
         headers: {

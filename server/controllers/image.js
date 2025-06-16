@@ -17,7 +17,7 @@ const PostSchema = z.object({
 
 export const addImage = async (req,res,next) => {
 
-  const result = Schema.safeParse(req.body);
+  const result = PostSchema.safeParse(req.body);
     let zodErrors = {};
     if(!result.success){
         result.error.issues.forEach((issue)=>{
